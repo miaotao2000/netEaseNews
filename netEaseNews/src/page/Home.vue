@@ -82,7 +82,11 @@ export default {
     }
   },
   mounted () {
-    this.$router.push({name: 'Headlines', params: {news: this.totalnews[0].feedio}})
+    if (this.active === 0) {
+      this.$router.push({name: 'Headlines', params: {news: this.totalnews[0].feedio}})
+    } else {
+      this.$router.push(this.$store.state.navbar[this.$store.state.active].component)
+    }
   },
   methods: {
     toColumn () {

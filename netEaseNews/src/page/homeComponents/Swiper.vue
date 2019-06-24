@@ -36,6 +36,8 @@ export default {
           }
         }
       })
+    const sWidth = this.$refs['s-con'].offsetWidth
+    this.myswiper.setTranslate(-sWidth * this.active)
   },
   methods: {
     ...mapActions([

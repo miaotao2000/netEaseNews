@@ -37,23 +37,14 @@ const getters = {
 const mutations = {
   changeActive (state, index) {
     state.active = index
+  },
+  resetActive (state) {
+    state.active = 0
   }
-  // decrement(state) {
-  //     state.count--
-  // }
 }
 const actions = {
-  changeActive: ({commit}, index) => commit('changeActive', index)
-  // decrement: ({ commit }) => commit('decrement'),
-  // incrementIfOdd({ commit, state }) {
-  //     if (state.count % 2 != 0)
-  //         commit('increment')
-  // },
-  // incrementAsync({ commit }){
-  //     setTimeout(() => {
-  //         commit('increment')
-  //       }, 1000)
-  // }
+  changeActive: ({commit}, index) => commit('changeActive', index),
+  resetActive: ({commit}) => commit('resetActive')
 }
 export default new Vuex.Store({
   state,

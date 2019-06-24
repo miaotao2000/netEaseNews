@@ -46,9 +46,17 @@ export default {
       active: 0
     }
   },
+  mounted () {
+    this.active = {
+      'Headlines': 0,
+      'Video': 1,
+      'Chat': 2,
+      'Mine': 3
+    }[this.$route.name]
+  },
   methods: {
     toHome () {
-      this.$router.push('Home')
+      this.$router.push('/')
       this.active = 0
     },
     toVideo () {
@@ -63,6 +71,10 @@ export default {
       this.$router.push('Mine')
       this.active = 3
     }
+    // ,
+    // ...mapActions([
+    //   'resetActive'
+    // ])
   }
 }
 </script>

@@ -182,6 +182,7 @@ export default {
 .falseDom
   position absolute
 .c-con
+  height 100vh
   position absolute
   top 0
   background-color white

@@ -2,6 +2,7 @@
   <div id="app">
     {{status}}
      <router-view />
+     <div class="mg-bt"></div>
      <tabbar :active='$store.state.active'/>
   </div>
 </template>
@@ -27,5 +28,6 @@ export default {
   padding 0
 .page
   width 100%
-  height 100vh
+.mg-bt
+  margin-bottom 1.36rem /* 51/37.5 */
 </style>
