@@ -21,6 +21,7 @@ export default {
   height 1.066667rem /* 40/37.5 */
   display flex
   align-items center
+  background-color white
   .nav-con
     flex 9
     display flex

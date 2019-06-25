@@ -47,7 +47,6 @@ export default {
   watch: {
     active: function (newVal) {
       const sWidth = this.$refs['s-con'].offsetWidth
-      this.myswiper.setTransition(1000)
       this.myswiper.setTranslate(-sWidth * newVal)
     }
   }

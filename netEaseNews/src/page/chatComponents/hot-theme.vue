@@ -8,6 +8,7 @@
         <img src="../../assets/hot-theme/right.svg" alt="">
       </div>
     </div>
+    <div class="swiper-container">
     <div class="swiper-con">
     <div class="swiper">
       <div class="item" v-for="(item, index) of themes" :key='index'
@@ -16,6 +17,7 @@
         <div class="item-title">{{item.title}}</div>
         <div class="people">{{item.people}}万人参与</div>
       </div>
+    </div>
     </div>
     </div>
   </div>
@@ -58,8 +60,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.swiper-container
+  padding .266667rem /* 10/37.5 */
 .container
-  background-color #e6e6e6
+  background-color white
+  margin-bottom .133333rem /* 5/37.5 */
 .header
   display flex
   padding .133333rem /* 5/37.5 */
