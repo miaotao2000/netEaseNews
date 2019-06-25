@@ -60,15 +60,15 @@ export default {
       this.active = 0
     },
     toVideo () {
-      this.$router.push('Video')
+      this.$router.push({name: 'Video'})
       this.active = 1
     },
     toChat () {
-      this.$router.push('Chat')
+      this.$router.push({name: 'Recommand'})
       this.active = 2
     },
     toMine () {
-      this.$router.push('Mine')
+      this.$router.push({name: 'Mine'})
       this.active = 3
     }
     // ,

@@ -9,6 +9,8 @@ import Picture from '@/page/homeComponents/Picture'
 import Video from '@/page/Video'
 import Mine from '@/page/Mine'
 import Chat from '@/page/Chat'
+import Recommand from '@/page/chatComponents/recommand'
+import Follow from '@/page/chatComponents/follow'
 
 Vue.use(Router)
 
@@ -54,7 +56,19 @@ export default new Router({
     {
       path: '/Chat',
       name: 'Chat',
-      component: Chat
+      component: Chat,
+      children: [
+        {
+          path: '/Chat/recommand',
+          name: 'Recommand',
+          component: Recommand
+        },
+        {
+          path: '/Chat/follow',
+          name: 'Follow',
+          component: Follow
+        }
+      ]
     },
     {
       path: '/Mine',
