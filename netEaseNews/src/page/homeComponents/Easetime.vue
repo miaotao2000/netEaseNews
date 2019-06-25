@@ -18,19 +18,19 @@ export default {
       feedStream: [
         {
           text: '轻松一刻: NBA篮球新秀状元出炉！他姓蔡',
-          img: 'https://nie.res.netease.com/r/pic/20180817/4b8604e7-716f-48db-a1b8-d906e7444c29.jpg',
+          img: 'http://60.205.203.205:8080/imgs/nsh15.jpg',
           src: '轻松一刻工作室',
           follow: '4414跟帖'
         },
         {
           text: '为啥世界各国都规定18岁成年？不是16，也不是19?',
-          img: 'https://nie.res.netease.com/r/pic/20180817/74b77336-b3f7-4b82-b35d-547afddacf50.jpg',
+          img: 'http://60.205.203.205:8080/imgs/nsh8.jpg',
           src: '胖遍怪聊',
           follow: '84跟帖'
         },
         {
           text: '宇宙最大背锅侠"水逆"，究竟是怎么回事？',
-          img: 'https://nie.res.netease.com/r/pic/20180817/68e7ea5a-8828-486e-91cd-1ec5ee4e2303.jpg',
+          img: 'http://60.205.203.205:8080/imgs/nsh2.jpg',
           src: '曲大师',
           follow: '61跟帖'
         }

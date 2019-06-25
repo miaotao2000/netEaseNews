@@ -47,7 +47,7 @@ export default {
           '不该背这个锅',
           praise: 199,
           comment: 42,
-          other: 'https://nie.res.netease.com/r/pic/20181112/c84f541f-4a9d-4e91-b771-16fe4d7c189d.jpg'
+          other: 'http://60.205.203.205:8080/imgs/nsh4.jpg'
         },
         {
           nickName: '淼哥故事会',
@@ -55,7 +55,7 @@ export default {
           content: '嘉慧：给您重点交代一下羊水栓塞的问题，发生率很低，发生了您就上电视了。',
           praise: 161,
           comment: 11,
-          other: 'https://nie.res.netease.com/r/pic/20180817/4b8604e7-716f-48db-a1b8-d906e7444c29.jpg'
+          other: 'http://60.205.203.205:8080/imgs/nsh14.jpg'
         }
       ]
     }

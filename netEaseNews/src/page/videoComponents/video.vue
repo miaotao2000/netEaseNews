@@ -41,7 +41,7 @@ export default {
       feedStream: [
         {
           title: '刘恺威新恋情曝光，女友是大家最熟悉的她？网友：难怪会离婚！',
-          bgImg: 'https://nie.res.netease.com/r/pic/20181112/c84f541f-4a9d-4e91-b771-16fe4d7c189d.jpg',
+          bgImg: 'http://60.205.203.205:8080/imgs/nsh7.jpg',
           playTimes: '30.8万',
           time: '01:48',
           avatar: '',
@@ -51,7 +51,7 @@ export default {
         },
         {
           title: '李咏生前最后主持，不断跟大家挥手道别，却无人注意他说的2个字',
-          bgImg: 'https://nie.res.netease.com/r/pic/20181112/d6a0da64-8d8d-441f-9a10-07344762ab85.jpg',
+          bgImg: 'http://60.205.203.205:8080/imgs/nsh2.jpg',
           playTimes: '15.4万',
           time: '01:15',
           avatar: '',
@@ -61,7 +61,7 @@ export default {
         },
         {
           title: '《欢乐喜剧人》贾玲实力搞笑，观众笑到肚子疼，搞笑啊！',
-          bgImg: 'https://nie.res.netease.com/r/pic/20180817/66ad330b-84dc-4b85-956b-6ecabbf82ab6.jpg',
+          bgImg: 'http://60.205.203.205:8080/imgs/nsh10.jpg',
           playTimes: '2453',
           time: '12:23',
           avatar: '',

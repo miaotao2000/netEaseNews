@@ -31,27 +31,27 @@ export default {
         {
           title: '你必须要知道的头等大事',
           people: 76.9,
-          bgImg: 'https://nie.res.netease.com/r/pic/20180817/74b77336-b3f7-4b82-b35d-547afddacf50.jpg'
+          bgImg: 'http://60.205.203.205:8080/imgs/nsh7.jpg'
         },
         {
           title: '值得关注的民生小事',
           people: 160.3,
-          bgImg: 'https://nie.res.netease.com/r/pic/20180817/68e7ea5a-8828-486e-91cd-1ec5ee4e2303.jpg'
+          bgImg: 'http://60.205.203.205:8080/imgs/nsh9.jpg'
         },
         {
           title: '娱乐圈吃瓜阵地',
           people: 110.6,
-          bgImg: 'https://nie.res.netease.com/r/pic/20181112/e47142f6-d42a-485d-b6a3-e208cf6d199a.jpg'
+          bgImg: 'http://60.205.203.205:8080/imgs/nsh12.jpg'
         },
         {
           title: 'NBA赛场',
           people: 130.5,
-          bgImg: 'https://nie.res.netease.com/r/pic/20180817/4b8604e7-716f-48db-a1b8-d906e7444c29.jpg'
+          bgImg: 'http://60.205.203.205:8080/imgs/nsh15.jpg'
         },
         {
           title: '大公司情报局',
           people: 117.1,
-          bgImg: 'https://nie.res.netease.com/r/pic/20181112/d6a0da64-8d8d-441f-9a10-07344762ab85.jpg'
+          bgImg: 'http://60.205.203.205:8080/imgs/nsh2.jpg'
         }
       ]
     }

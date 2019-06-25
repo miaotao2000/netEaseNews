@@ -35,25 +35,25 @@ export default {
       feedStream: [
         {
           imgList: [
-            'https://nie.res.netease.com/r/pic/20181112/2de5ed29-88e1-478f-8b73-e81eaf2d0de0.jpg',
-            'https://nie.res.netease.com/r/pic/20181112/c84f541f-4a9d-4e91-b771-16fe4d7c189d.jpg',
-            'https://nie.res.netease.com/r/pic/20181112/5957e397-2269-4b78-93b9-49cf971ed9fa.jpg'
+            'http://60.205.203.205:8080/imgs/nsh15.jpg',
+            'http://60.205.203.205:8080/imgs/nsh10.jpg',
+            'http://60.205.203.205:8080/imgs/nsh8.jpg'
           ],
           text: '印度总理莫迪与民众同练瑜伽 动作妖娆'
         },
         {
           imgList: [
-            'https://nie.res.netease.com/r/pic/20181112/b0066637-8175-40a5-8fd2-a1b252c18d8c.jpg',
-            'https://nie.res.netease.com/r/pic/20181112/d6a0da64-8d8d-441f-9a10-07344762ab85.jpg',
-            'https://nie.res.netease.com/r/pic/20181112/e47142f6-d42a-485d-b6a3-e208cf6d199a.jpg'
+            'http://60.205.203.205:8080/imgs/nsh6.jpg',
+            'http://60.205.203.205:8080/imgs/nsh4.jpg',
+            'http://60.205.203.205:8080/imgs/nsh1.jpg'
           ],
           text: '航拍湖南新晃一中埋尸现场 坑深近4米'
         },
         {
           imgList: [
-            'https://nie.res.netease.com/r/pic/20181112/79b44269-730a-4eea-9e95-dc3936e412db.jpg',
-            'https://nie.res.netease.com/r/pic/20181112/a956b20b-9cae-4168-aa8f-223b08328afa.jpg',
-            'https://nie.res.netease.com/r/pic/20180817/68e7ea5a-8828-486e-91cd-1ec5ee4e2303.jpg'
+            'http://60.205.203.205:8080/imgs/nsh12.jpg',
+            'http://60.205.203.205:8080/imgs/nsh3.jpg',
+            'http://60.205.203.205:8080/imgs/nsh7.jpg'
           ],
           text: '男子挑战吉尼斯纪录 将10公斤蜜蜂吸到身上'
         }
