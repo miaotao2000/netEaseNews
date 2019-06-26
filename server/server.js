@@ -26,11 +26,10 @@ app.use(session({
 // 配置静态资源加载中间件
 app.use(static(path.join(__dirname,'./public')))
 
-app.use(async ctx => {
-  ctx.body = {state: 200}
-})
-
 // 3000端口启动服务
 app.listen(3000, () =>{
   console.log('server runing successfully!')
 })
+
+// 启用路由
+app.use(require('./routers/register.js').routes())

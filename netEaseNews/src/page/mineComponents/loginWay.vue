@@ -14,7 +14,7 @@
       <img src="../../assets/m-header/sina.svg" alt="">
     </div>
   </div>
-  <div class="login-btn">
+  <div class="login-btn" @click="login">
     登录/注册
   </div>
   </div>
@@ -22,7 +22,11 @@
 
 <script>
 export default {
-
+  methods: {
+    login () {
+      //
+    }
+  }
 }
 </script>
 
