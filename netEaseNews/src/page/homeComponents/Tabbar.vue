@@ -50,7 +50,7 @@ export default {
     this.active = {
       'Headlines': 0,
       'Video': 1,
-      'Chat': 2,
+      'Recommand': 2,
       'Mine': 3
     }[this.$route.name]
   },

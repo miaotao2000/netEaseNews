@@ -26,23 +26,24 @@ export default {
 <style lang="stylus" scoped>
 .card
   border-bottom 1px solid #ccc
-  padding .16rem /* 6/37.5 */
+  padding .266667rem /* 10/37.5 */
   font-size 0
   .text
     font-size .426667rem /* 16/37.5 */
     line-height 1.5
-    margin-bottom .266667rem .213333rem /* 8/37.5 */
+    margin-bottom .266667rem /* 10/37.5 */
   img
     display inline-block
     width 33%
+    height 1.866667rem /* 70/37.5 */
     margin .133333rem /* 5/37.5 */ 0
     margin-right .5%
-    margin-bottom .266667rem /* 10/37.5 */
+    margin-bottom .4rem /* 15/37.5 */
   #imgLast
     margin-right 0
   span
     color #aaa
-    font-size .266667rem /* 10/37.5 */
+    font-size .32rem /* 12/37.5 */
   .src
     margin-right .266667rem /* 10/37.5 */
 </style>

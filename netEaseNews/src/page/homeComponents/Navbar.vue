@@ -68,7 +68,17 @@ export default {
 
 <style lang="stylus" scoped>
 .i-active
-  color red
+  font-weight bold
+  position relative
+  &::after
+    content ''
+    position absolute
+    border 1.5px solid red
+    width .106667rem /* 4/37.5 */
+    height .106667rem /* 4/37.5 */
+    border-radius 50%
+    top .133333rem /* 5/37.5 */
+    right .266667rem /* 10/37.5 */
 .container
   display flex
   height .8rem

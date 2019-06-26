@@ -26,6 +26,24 @@ const state = {
       component: 'Picture'
     }
   ],
+  moreList: [
+    {
+      name: '星座',
+      component: 'Constellation'
+    },
+    {
+      name: '音乐',
+      component: 'Musi'
+    },
+    {
+      name: '教育',
+      component: 'Education'
+    },
+    {
+      name: '佛学',
+      component: 'Buddhism'
+    }
+  ],
   active: 0
 }
 const getters = {

@@ -85,12 +85,11 @@ export default {
           display flex
           color #666
           padding .08rem /* 3/37.5 */0
-          font-size .266667rem /* 10/37.5 */
-          transform scale(0.9)
+          font-size .293333rem /* 11/37.5 */
+          margin-top .133333rem /* 5/37.5 */
         .join
           flex 1
           margin-right .133333rem /* 5/37.5 */
-          margin-left -.266667rem /* 10/37.5 */
         .follow
           flex 2
       .btn

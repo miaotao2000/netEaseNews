@@ -59,7 +59,7 @@ export default {
       width 100%
   span
     color #aaa
-    font-size .266667rem /* 10/37.5 */
+    font-size .32rem /* 12/37.5 */
   .src
     margin-right .266667rem /* 10/37.5 */
 </style>

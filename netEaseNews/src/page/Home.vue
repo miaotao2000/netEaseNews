@@ -3,7 +3,8 @@
     <n-header/>
     <navbar :active='$store.state.active'  :list='$store.state.navbar' @toColumn='toColumn'/>
     <swiper  :active='$store.state.active' :contentArr='$store.state.navbar' :totalnews='totalnews'/>
-    <column :lists='$store.state.navbar' :hid='hid' :active='$store.state.active' @close='closeColumn'/>
+    <column :lists='$store.state.navbar' :hid='hid' :active='$store.state.active' :moreList='$store.state.moreList'
+     @close='closeColumn'/>
   </div>
 </template>
 

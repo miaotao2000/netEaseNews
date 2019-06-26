@@ -73,12 +73,14 @@ export default {
       margin-bottom .266667rem /* 10/37.5 */
     span
       color #aaa
-      font-size .266667rem /* 10/37.5 */
+      font-size .32rem /* 12/37.5 */
     .src
       margin-right .266667rem /* 10/37.5 */
   .img
     flex 4
     padding .266667rem /* 10/37.5 */
+    height 2.133333rem /* 80/37.5 */
     img
       width 100%
+      height 100%
 </style>

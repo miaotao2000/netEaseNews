@@ -91,9 +91,11 @@ export default {
   .content
     white-space: pre-wrap
     line-height 1.5
-    font-size .373333rem /* 14/37.5 */
+    font-size .4rem /* 15/37.5 */
+    padding 0 .133333rem /* 5/37.5 */
   .other
     margin-top .266667rem /* 10/37.5 */
+    padding 0 .133333rem /* 5/37.5 */
     height 4rem /* 150/37.5 */
     overflow hidden
     img

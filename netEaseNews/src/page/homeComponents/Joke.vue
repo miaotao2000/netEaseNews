@@ -75,7 +75,7 @@ export default {
   background-color #E6E6E6
   .joke-con
     background-color white
-    padding .186667rem /* 7/37.5 */
+    padding .266667rem /* 10/37.5 */
     margin-bottom .133333rem /* 5/37.5 */
     .text
       font-size .426667rem /* 16/37.5 */

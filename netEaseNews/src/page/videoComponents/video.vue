@@ -77,7 +77,7 @@ export default {
 
 <style lang="stylus" scoped>
 .video
-  height 4.533333rem /* 170/37.5 */
+  height 4.8rem /* 180/37.5 */
   position relative
   .title
     padding .133333rem /* 5/37.5 */
@@ -111,12 +111,12 @@ export default {
     padding .133333rem /* 5/37.5 */
 .footer
   display flex
-  padding .266667rem /* 10/37.5 */ .133333rem /* 5/37.5 */
+  padding .346667rem /* 13/37.5 */ .133333rem /* 5/37.5 */
   .author-con
     flex 4
     position relative
     .author
-      background-color #e6e6e6
+      background-color #E7EBED
       position absolute
       top 50%
       transform translateY(-50%)

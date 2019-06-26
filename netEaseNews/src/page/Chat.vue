@@ -16,5 +16,5 @@ export default {
 
 <style lang="stylus" scoped>
 .page
-  background-color #e6e6e6
+  background-color #E7EBED
 </style>

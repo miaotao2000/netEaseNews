@@ -19,7 +19,7 @@
         <span v-show="edited&&trueDom&&index!=0" class="add" :data-index='index'>×</span>{{item.name}}
       </div>
       <div class="item falseDom" v-show="ready">
-        <span v-show="edited" class="add" :data-index='falseDom.index'>×</span>{{moveText}}
+        <span v-show="edited" class="add" :data-index='falseDom.index'>×</span>{{moveText.name}}
       </div>
     </div>
     <div class="my-colmun_con">
@@ -37,8 +37,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
-  props: ['lists', 'hid'],
+  props: ['lists', 'hid', 'moreList'],
   data () {
     return {
       tip: '点击进入栏目',
@@ -56,25 +57,7 @@ export default {
       trueDom: true,
       moveText: '',
       ready: false,
-      timeout: null,
-      moreList: [
-        {
-          name: '星座',
-          component: 'Constellation'
-        },
-        {
-          name: '音乐',
-          component: 'Musi'
-        },
-        {
-          name: '教育',
-          component: 'Education'
-        },
-        {
-          name: '佛学',
-          component: 'Buddhism'
-        }
-      ]
+      timeout: null
     }
   },
   methods: {
@@ -100,7 +83,7 @@ export default {
         let index = el.target.dataset.index
         if (this.edited && index !== '0') {
           this.dragged = true
-          this.moveText = this.list[index].name
+          this.moveText = this.list[index]
           this.falseDom.index = index
           this.falseDom.oldX = el.target.offsetLeft
           this.falseDom.oldY = el.target.offsetTop - 10
@@ -154,12 +137,17 @@ export default {
         this.moreList.push({name: deleteText, component})
         console.log(this.moreList)
         this.$emit('changeActive')
+        return
       }
+      let index = el.target.dataset.index
+      this.changeActive(index)
+      this.$router.push(this.list[index].component)
+      this.closeColumn()
     },
     addColumn (el) {
       let index = el.target.dataset.index
       let addText = this.moreList[index].name
-      let component = this.list[index].component
+      let component = this.moreList[index].component
       this.moreList.splice(index, 1)
       this.list.push({name: addText, component})
     },
@@ -168,7 +156,10 @@ export default {
       this.editText = '编辑'
       this.edited = false
       this.$emit('close', this.list)
-    }
+    },
+    ...mapActions([
+      'changeActive'
+    ])
   },
   created () {
     this.list = this.lists
@@ -183,7 +174,7 @@ export default {
   position absolute
 .c-con
   height 100vh
-  position absolute
+  position fixed
   top 0
   background-color white
   z-index 100

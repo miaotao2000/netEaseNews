@@ -47,6 +47,15 @@ export default {
 <style lang="stylus" scoped>
 .active
   font-weight bold
+  position relative
+  &::after
+    content ''
+    position absolute
+    border 1.5px solid red
+    width .106667rem /* 4/37.5 */
+    height .106667rem /* 4/37.5 */
+    border-radius 50%
+    top .133333rem /* 5/37.5 */
 .header
   height 1.066667rem /* 40/37.5 */
   display flex
