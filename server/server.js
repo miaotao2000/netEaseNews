@@ -17,6 +17,9 @@ const sessionMysqlConfig = {
   host: config.database.HOST,
 }
 
+// 结构上传对象
+app.use(bodyParser())
+
 // 配置session中间件
 app.use(session({
   key: 'USER_SID',
@@ -33,3 +36,4 @@ app.listen(3000, () =>{
 
 // 启用路由
 app.use(require('./routers/register.js').routes())
+app.use(require('./routers/article.js').routes())
