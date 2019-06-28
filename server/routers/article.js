@@ -25,6 +25,7 @@ router.get('/articles', async (ctx, next) => {
       follow: info.flonumber,
       html: mdit.render(info.md),
       userId: info.userId,
+      time: info.updateTime
     }
   })
   ctx.body = {

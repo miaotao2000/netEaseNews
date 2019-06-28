@@ -11,6 +11,7 @@ import Mine from '@/page/Mine'
 import Chat from '@/page/Chat'
 import Recommand from '@/page/chatComponents/recommand'
 import Follow from '@/page/chatComponents/follow'
+import Arcticle from '@/components/Arcticle'
 
 Vue.use(Router)
 
@@ -74,6 +75,11 @@ export default new Router({
       path: '/Mine',
       name: 'Mine',
       component: Mine
+    },
+    {
+      path: '/Arcticle',
+      name: 'Arcticle',
+      component: Arcticle
     }
   ]
 })

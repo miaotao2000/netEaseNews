@@ -1,6 +1,6 @@
 <template>
-  <div class="page" @scroll="scroll">
-    <card :feedio='$route.params.news || news'/>
+  <div class="page">
+    <card :feedio='news'/>
   </div>
 </template>
 
@@ -21,9 +21,6 @@ export default {
         .then(res => {
           this.news = res.data.news
         })
-    },
-    scroll (el) {
-      console.log(el)
     }
   },
   mounted () {
