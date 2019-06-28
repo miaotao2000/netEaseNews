@@ -9,8 +9,10 @@ import 'swiper/dist/css/swiper.css'
 import Vant from 'vant'
 import 'vant/lib/index.css'
 import store from './store'
+import axios from 'axios'
 
 Vue.config.productionTip = false
+Vue.prototype.$http = axios // 将axios挂载到vue的原型链上
 Vue.use(ElementUI)
 Vue.use(Vant)
 

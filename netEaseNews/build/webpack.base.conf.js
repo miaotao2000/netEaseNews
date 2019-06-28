@@ -24,6 +24,16 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+    proxy: {
+      "/": {
+        target: "http://localhost:3000",
+        changeOrigin: true
+      }
+    }
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
