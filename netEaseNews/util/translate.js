@@ -5,6 +5,9 @@ const translate = (time) => {
   if (time.includes('hour ') || time.includes('hours ')) {
     time = time.replace(/hour |hours /, '小时')
   }
+  if (time.includes('day ') || time.includes('days ')) {
+    time = time.replace(/day |days /, '天')
+  }
   if (time.includes('month ') || time.includes('months ')) {
     time = time.replace(/month |months /, '月')
   }

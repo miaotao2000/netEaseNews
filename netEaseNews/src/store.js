@@ -44,7 +44,10 @@ const state = {
       component: 'Buddhism'
     }
   ],
-  active: 0
+  active: 0,
+  route: ['/', '/'],
+  cache: [],
+  needTabbar: true
 }
 const getters = {
   // doneTodos: state => {
@@ -58,11 +61,31 @@ const mutations = {
   },
   resetActive (state) {
     state.active = 0
+  },
+  pushRoute (state, router) {
+    state.route.push(router)
+  },
+  shiftRoute (state) {
+    state.route.shift()
+  },
+  changeCache (state, arr) {
+    state.cache = arr
+  },
+  noTabbar (state) {
+    state.needTabbar = false
+  },
+  needTabbar (state) {
+    state.needTabbar = true
   }
 }
 const actions = {
   changeActive: ({commit}, index) => commit('changeActive', index),
-  resetActive: ({commit}) => commit('resetActive')
+  resetActive: ({commit}) => commit('resetActive'),
+  pushRoute: ({commit}, router) => commit('pushRoute', router),
+  shiftRoute: ({commit}) => commit('shiftRoute'),
+  changeCache: ({commit}, arr) => commit('changeCache', arr),
+  noTabbar: ({commit}) => commit('noTabbar'),
+  needTabbar: ({commit}) => commit('needTabbar')
 }
 export default new Vuex.Store({
   state,

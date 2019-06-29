@@ -1,4 +1,6 @@
 <template>
+  <div class="top">
+    <n-header />
   <div class="container">
     <div class="left-scroll" ref="scroll">
       <div class="item" v-for="(item,index) of list" :key="index" :class="active == index? 'i-active':''"
@@ -8,12 +10,17 @@
       <img src="../../assets/navbar/diary.svg" alt="">
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import header from '@/page/homeComponents/Header'
 export default {
   props: ['active', 'list'],
+  components: {
+    'n-header': header
+  },
   data () {
     return {
     }
@@ -67,6 +74,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.top
+  position fixed
+  top 0
+  width 100%
+  background-color #fff
+  z-index 100
 .i-active
   font-weight bold
   position relative

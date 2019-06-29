@@ -5,7 +5,7 @@ const session = require('koa-session-minimal')
 const MysqlStore = require('koa-mysql-session')
 const config = require('./config/default.js')
 const router = require('koa-router')
-const static = require('koa-static')
+const static = require('koa-static-cache')
 
 const app = new Koa()
 
@@ -27,7 +27,9 @@ app.use(session({
 }))
 
 // 配置静态资源加载中间件
-app.use(static(path.join(__dirname,'./public')))
+app.use(static(path.join(__dirname,'./public'), {
+  maxAge: 1 * 24 * 60 * 60
+}))
 
 // 3000端口启动服务
 app.listen(3000, () =>{

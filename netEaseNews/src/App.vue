@@ -2,7 +2,8 @@
   <div id="app">
     {{status}}
      <router-view />
-     <div class="mg-bt"></div>
+     <div class="mg-bt">
+     </div>
      <tabbar :active='$store.state.active'/>
   </div>
 </template>
@@ -13,7 +14,8 @@ export default {
   name: 'App',
   data () {
     return {
-      status: this.$status
+      status: this.$status,
+      loading: true
     }
   },
   components: {

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="card" v-for="(item,index) of feedio" :key='index' @click="link(index)">
       <div class="mask active" v-if='linked===index'></div>
-      <div class="text">{{item.text}}</div>
+      <div class="text" :class="item.read?'read':''">{{item.text}}</div>
       <div class="img-con">
         <img :src="item.img[0]" alt="">
         <img :src="item.img[1]" alt="">
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   props: ['feedio'],
   data () {
@@ -26,10 +27,19 @@ export default {
     link (index) {
       this.linked = index
       let item = this.feedio[index]
+      item.read = 1
       setTimeout(() => {
         this.$router.push({name: 'Arcticle', params: { item }})
+        this.pushRoute('Arcticle')
+        this.shiftRoute()
+        this.changeCache(this.feedio)
       }, 300)
-    }
+    },
+    ...mapActions([
+      'pushRoute',
+      'shiftRoute',
+      'changeCache'
+    ])
   }
 }
 </script>
@@ -70,6 +80,8 @@ export default {
     line-height 1.5
     margin-bottom .266667rem /* 10/37.5 */
     color black
+  .read
+    color #aaa
   img
     display inline-block
     width 33%

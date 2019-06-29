@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="$store.state.needTabbar">
     <div class="col">
       <div class="target" @click="toHome">
         <div class="icon">
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -55,26 +56,34 @@ export default {
     }[this.$route.name]
   },
   methods: {
+    ...mapActions([
+      'pushRoute',
+      'shiftRoute'
+    ]),
     toHome () {
       this.$router.push('/')
+      this.pushRoute('Headlines')
+      this.shiftRoute()
       this.active = 0
     },
     toVideo () {
       this.$router.push({name: 'Video'})
+      this.pushRoute('Video')
+      this.shiftRoute()
       this.active = 1
     },
     toChat () {
       this.$router.push({name: 'Recommand'})
+      this.pushRoute('Recommand')
+      this.shiftRoute()
       this.active = 2
     },
     toMine () {
       this.$router.push({name: 'Mine'})
+      this.pushRoute('Mine')
+      this.shiftRoute()
       this.active = 3
     }
-    // ,
-    // ...mapActions([
-    //   'resetActive'
-    // ])
   }
 }
 </script>
@@ -83,12 +92,12 @@ export default {
 .active
   color red
 .container
-  z-index 1
   position fixed
   bottom 0
   width 100%
   display flex
   background-color #fff
+  z-index 1000
   .col
     flex  1
     text-align center

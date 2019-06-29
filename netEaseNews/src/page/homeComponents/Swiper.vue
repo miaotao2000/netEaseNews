@@ -33,6 +33,8 @@ export default {
           slideChangeTransitionEnd: function () {
             that.changeActive(this.activeIndex)
             that.$router.push(that.contentArr[this.activeIndex].component)
+            that.pushRoute(that.contentArr[this.activeIndex].component)
+            that.shiftRoute()
           }
         }
       })
@@ -41,7 +43,9 @@ export default {
   },
   methods: {
     ...mapActions([
-      'changeActive'
+      'changeActive',
+      'pushRoute',
+      'shiftRoute'
     ])
   },
   watch: {
@@ -58,6 +62,7 @@ export default {
   position relative
 .swiper-container
   width 100%
+  margin-top 2rem /* 75/37.5 */
   .loading
     position absolute
     top 5.333333rem /* 200/37.5 */

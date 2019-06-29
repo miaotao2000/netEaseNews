@@ -8,14 +8,17 @@ const mdit = new MarkDown()
 
 router.post('/articles', async (ctx, next) => {
   let { md, title } = ctx.request.body
-  let userId = 5
-  // await articleModel.insertArticle([title,md,userId,moment().format('YYYY-MM-DD HH:mm:ss'),4185])
-  await userModel.userAllin(['No.5', '123456', '青橙爱娱乐'])
+  let userId = 10
+  // await articleModel.insertArticle([title,md,userId,moment().format('YYYY-MM-DD HH:mm:ss'),''])
+  await userModel.userAllin(['No.10', '123456', '三明的那些事'])
   ctx.body = mdit.render(md)
 })
 
 router.get('/articles', async (ctx, next) => {
-  let result = await articleModel.findArticleAndUser(1)
+  let { page } = ctx.query
+  page = + page + 1
+  let result = await articleModel.findArticleAndUser(page)
+
   let news = result.map(info => {
     return {
       text: info.title,
