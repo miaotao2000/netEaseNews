@@ -70,7 +70,7 @@ export default {
       })
       setTimeout(() => {
         this.isLoading = false
-      }, 1000)
+      }, 800)
     }
   },
   created () {
@@ -88,12 +88,13 @@ export default {
   top 2.4rem /* 90/37.5 */
   left 50%
   transform translateX(-50%)
-  animation show .5s ease forwards
+  animation show .2s linear forwards
+  opacity 1
 @keyframes show {
   0% {
-    width 50%
+    width 70%
   }
-  100%{
+  10%{
     width 100%
   }
 }

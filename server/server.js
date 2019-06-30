@@ -39,3 +39,4 @@ app.listen(3000, () =>{
 // 启用路由
 app.use(require('./routers/register.js').routes())
 app.use(require('./routers/article.js').routes())
+app.use(require('./routers/follows.js').routes())

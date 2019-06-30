@@ -23,7 +23,7 @@ export default {
       hid: true
     }
   },
-  created () {
+  mounted () {
     this.$router.push(this.$store.state.navbar[this.$store.state.active].component)
     this.pushRoute(this.$store.state.navbar[this.$store.state.active].component)
     this.shiftRoute()

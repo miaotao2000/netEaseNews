@@ -47,7 +47,8 @@ const state = {
   active: 0,
   route: ['/', '/'],
   cache: [],
-  needTabbar: true
+  needTabbar: true,
+  login: false
 }
 const getters = {
   // doneTodos: state => {
@@ -76,6 +77,9 @@ const mutations = {
   },
   needTabbar (state) {
     state.needTabbar = true
+  },
+  changeLogin (state) {
+    state.login = !state.login
   }
 }
 const actions = {

@@ -21,7 +21,7 @@ export default {
  methods: {
   post () {
     if (this.md) {
-      this.$http.post('/articles',{
+      this.$http.post('/follow',{
         title: this.title,
         md: this.md
       }).then(res => {

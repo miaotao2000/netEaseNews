@@ -2,7 +2,7 @@
   <div id="app">
     {{status}}
      <router-view />
-     <div class="mg-bt">
+     <div class="mg-bt" v-if="$store.state.needTabbar">
      </div>
      <tabbar :active='$store.state.active'/>
   </div>

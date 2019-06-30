@@ -2,13 +2,14 @@
 
 // 插入文章跟帖
 const insertFloToArticle = value => {
-  let _sql = "insert into articlesFollows set content=?,createTime=?,articleId=?,userId=?;"
+  let _sql = "insert into articlesFollows set content=?,createTime=?,articleId=?,userId=?,encourage=?;"
   return query(_sql, value)
 }
 
 // 更新文章跟帖点赞
 const updateEgToArticle = (value, id) => {
   let _sql = `update articlesFollows set encourage=? where id = ${id};`
+  return query(_sql, value)
 }
 
 // 通过跟帖id查找文章跟帖
@@ -31,7 +32,8 @@ const deleteAllFlo = articleId => {
 
 // 评论分页
 const findAtcFloByPage = (page, articleId) => {
-  let _sql = `select * from articlesFollows where articleId=${articleId} order by id desc limit ${(page - 1) * 5},5;`
+  let _sql = `select a.*,b.* from (select * from articlesFollows where articleId = ${articleId}) a left join users b on
+  a.userID = b.id order by encourage desc limit ${(page - 1) * 5},5;`
   return query(_sql)
 }
 

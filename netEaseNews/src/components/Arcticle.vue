@@ -1,6 +1,5 @@
 <template>
-  <div class="page" @touchmove='scroll'>
-    <div class="warp">
+  <div class="page">
     <div class="header">
       <div class="icon" @click="back">
         <img src="../assets/article/left.svg" alt="">
@@ -17,7 +16,10 @@
         </div>
       </div>
     </div>
+    <div class="bscroll" ref="bscrll">
+    <div class="warp" ref='warp' @touchmove='pullUp' @touchend='pullUpFinish'>
     <div class="container">
+      <div class="mt"></div>
       <div class="title">
         {{article.text}}
       </div>
@@ -34,8 +36,16 @@
 
     <div id="article" v-html="article.html"></div>
     </div>
+    <comments :id='article.id'/>
+    <div class="tip" v-show="tipShow">
+      <div class="empty"></div>
+      <div class="img-con"><img :src='tipImg[tipIndex]' alt=""></div>
+      <div>{{tipMsg}}</div>
+      </div>
     </div>
-    <comments />
+    </div>
+    <write :trueWrite='trueWrite' @write='write' :flonumber='article.follow'/>
+    <true-write :trueWrite='trueWrite'/>
   </div>
 </template>
 
@@ -43,14 +53,33 @@
 import { mapActions } from 'vuex'
 import sumTime from '../../util/sumTime'
 import comments from '@/components/comments'
+import BScroll from 'better-scroll'
+import write from '@/components/writeFollow'
+import trueWrite from '@/components/trueWrite'
 export default {
   components: {
-    'comments': comments
+    'comments': comments,
+    'write': write,
+    'true-write': trueWrite
   },
   data () {
     return {
+      trueWrite: false,
       article: null,
-      show: false
+      show: false,
+      myscroll: null,
+      scrollY: null,
+      tipShow: false,
+      maxY: 0,
+      tipMsg: '上拉关闭此当前页',
+      timeout: null,
+      close: false,
+      tipImg: [
+        '../../static/imgs/top.svg',
+        '../../static/imgs/close.svg'
+      ],
+      tipIndex: 0,
+      clientY: 0
     }
   },
   created () {
@@ -77,26 +106,83 @@ export default {
       let shift = this.shiftRoute()
       this.pushRoute(shift)
     },
-    scroll (el) {
-      if (document.documentElement.scrollTop >= 100) {
-        console.log('ok')
-        this.show = true
+    pullUp () {
+      this.trueWrite = false
+      if (this.maxY - this.scrollY >= 60 && this.maxY) {
+        this.tipMsg = '释放关闭此页'
+        this.tipIndex = 1
+        this.close = true
       } else {
-        this.show = false
+        this.tipMsg = '上拉关闭此页'
+        this.tipIndex = 0
+        this.close = false
       }
+    },
+    pullUpFinish () {
+      if (this.close) {
+        this.back()
+      }
+    },
+    write () {
+      this.trueWrite = true
     }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.myscroll = new BScroll(this.$refs['bscrll'], {
+        probeType: 3,
+        pullUpLoad: true
+      })
+      this.myscroll.on('scroll', pos => {
+        this.scrollY = pos.y
+        this.tipShow = true
+
+        if (this.scrollY < -100) {
+          this.show = true
+        } else {
+          this.show = false
+        }
+      })
+      this.myscroll.on('pullingUp', () => {
+        this.maxY = this.scrollY
+      })
+    })
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.warp
+.tip
+  bottom 1.333333rem /* 50/37.5 */
+  text-align center
+  font-size .4rem /* 15/37.5 */
+  padding .266667rem /* 10/37.5 */
+  display flex
+  align-items center
+  .empty
+    flex 3
+  .img-con
+    flex .5
+    display flex
+    align-items center
+    img
+      width .533333rem /* 20/37.5 */
+      margin-right .133333rem /* 5/37.5 */
+      margin-top .133333rem /* 5/37.5 */
+  div
+    flex 5
+    text-align left
+.bscroll
+  height 100vh
+  overflow hidden
+.container
   background white
   padding 0 .4rem /* 15/37.5 */
 .page
   box-sizing border-box
   background-color #E7EBED
   .header
+    background white
     display flex
     align-items center
     padding .266667rem /* 10/37.5 */.266667rem /* 10/37.5 */
@@ -106,6 +192,7 @@ export default {
     width 100%
     box-sizing border-box
     background-color #fff
+    z-index 100
     .icon
       flex 1
       padding .08rem /* 3/37.5 */0
@@ -143,8 +230,9 @@ export default {
       font-size .373333rem /* 14/37.5 */
       .nickname
         animation .5s show ease forwards
+  .mt
+    height 1.466667rem /* 55/37.5 */
   .title
-    margin-top 1.466667rem /* 55/37.5 */
     font-weight bold
     font-size .533333rem /* 20/37.5 */
     margin-bottom .266667rem /* 10/37.5 */

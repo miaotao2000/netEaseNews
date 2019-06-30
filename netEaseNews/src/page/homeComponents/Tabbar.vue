@@ -61,9 +61,10 @@ export default {
       'shiftRoute'
     ]),
     toHome () {
+      if (this.active === 0) {
+        return
+      }
       this.$router.push('/')
-      this.pushRoute('Headlines')
-      this.shiftRoute()
       this.active = 0
     },
     toVideo () {

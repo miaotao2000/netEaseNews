@@ -67,7 +67,7 @@ export default {
           avatar: '',
           name: '嘻哈百晓生',
           praiseNumber: 15,
-          commentNumbre: 0
+          commentNumbre: 5
         }
       ]
     }
@@ -140,7 +140,7 @@ export default {
       .number
         position absolute
         top 0
-        right -.293333rem /* 11/37.5 */
+        left .933333rem /* 35/37.5 */
         font-size .266667rem /* 10/37.5 */
         transform scale(0.7)
         color #000
