@@ -52,6 +52,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import md5 from '../../util/md5'
 export default {
   directives: {
     focus: {
@@ -81,7 +82,10 @@ export default {
   },
   methods: {
     ...mapActions([
-      'hidLogin'
+      'hidLogin',
+      'changeLogin',
+      'openLogin',
+      'setUser'
     ]),
     toregister () {
       this.register = !this.register
@@ -131,7 +135,22 @@ export default {
             pass: this.pass
           })
           .then(res => {
-            console.log(res)
+            if (!res.data.register) {
+              this.$message.error(res.data.msg)
+              this.user = ''
+              this.pass = ''
+              this.repass = ''
+              console.log(res.data)
+              return
+            }
+            this.$message({
+              showClose: true,
+              message: res.data.msg,
+              type: 'success'
+            })
+            this.changeLogin()
+            this.setUser(res.data.user)
+            this.hidLogin()
           })
         return
       }
@@ -139,7 +158,18 @@ export default {
         user: this.user,
         pass: this.pass
       }).then(res => {
-        console.log(res)
+        if (!res.data.login) {
+          this.$message.error(res.data.msg)
+        }
+        this.$message({
+          showClose: true,
+          message: res.data.msg,
+          type: 'success'
+        })
+        this.changeLogin()
+        this.hidLogin()
+        this.setUser(res.data.user)
+        sessionStorage.setItem('token', md5(res.data.user))
       })
     },
     test () {

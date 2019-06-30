@@ -2,6 +2,7 @@
   <div class="page">
     <m-header/>
     <loginWay/>
+    <my/>
     <grid/>
     <func :list='func1'/>
     <func :list='func2'/>
@@ -13,12 +14,14 @@ import header from '@/page/mineComponents/m-header'
 import loginWay from '@/page/mineComponents/loginWay'
 import grid from '@/page/mineComponents/grid'
 import func from '@/page/mineComponents/func'
+import my from '@/page/mineComponents/my'
 export default {
   components: {
     'm-header': header,
     'loginWay': loginWay,
     'grid': grid,
-    'func': func
+    'func': func,
+    'my': my
   },
   data () {
     return {

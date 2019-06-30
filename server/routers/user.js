@@ -12,12 +12,54 @@ router.get('/user', async (ctx, next) => {
 
 router.post('/user/register', async (ctx, next) => {
   let { user, pass } = ctx.request.body
+  let test = await userModel.findUserByUser(user)
+  if (test.length) {
+    ctx.body = {
+      msg: '已存在此账号!',
+      register: false,
+      test
+    }
+    return
+  }
   await userModel.insertUser([user, md5(pass)])
-  ctx.body = '注册成功!'
+  let userInfo = await userModel.findUserByUser(user)
+  console.log(userInfo)
+  ctx.body = {
+    msg: '注册成功!',
+    user: {
+      id: userInfo[0].id,
+      nickName: userInfo[0].nickName
+    },
+    register: true
+  }
 })
 router.post('/user/login', async (ctx, next) => {
   let { user, pass } = ctx.request.body
-  await userModel.insertUser([user, pass])
+  let res = await userModel.findUserByUser(user)
+
+  if (!res.length) {
+    ctx.body = {
+      login: false,
+      msg: '没有该用户'
+    }
+    return
+  }
+
+  if (md5(pass) != res[0].pass) {
+    ctx.body = {
+      login: false,
+      msg: '密码错误'
+    }
+    return
+  }
+  ctx.body = {
+    login: true,
+    msg: '登录成功',
+    user: {
+      id: res[0].id,
+      nickName:res[0].nickName
+    }
+  }
 })
 
 module.exports = router

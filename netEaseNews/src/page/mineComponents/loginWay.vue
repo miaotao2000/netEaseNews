@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="!$store.state.login">
   <div class="circle-con">
     <div class="circle">
       <img src="../../assets/m-header/phone.svg" alt="">

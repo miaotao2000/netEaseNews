@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <img src="../assets/comments/follow.jpg" alt="">
+      <img src="../../static/imgs/newfollow.jpg" alt="">
     </div>
     <div class="card" v-for="(item, index) of comments" :key='index'>
       <div class="card-header">
@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  props: ['id', 'needMore'],
+  props: ['id', 'needMore', 'newflo'],
   data () {
     return {
       comments: [],
@@ -51,12 +51,18 @@ export default {
   created () {
     this.getComments()
   },
+  watch: {
+    newflo: function (newVal) {
+      this.comments.unshift(newVal)
+    }
+  },
   methods: {
     getComments () {
       this.$http.get('/follow', {
         params: {
           page: 1,
-          id: this.id
+          id: this.id,
+          way: 'new'
         }
       })
         .then(res => {
@@ -85,9 +91,10 @@ export default {
   .header
     width 100%
     img
-      width 6.666667rem /* 250/37.5 */
+      width 5.066667rem /* 190/37.5 */
       margin 0 auto
       display block
+      transform translateX(.133333rem ) /* 5/37.5 */
   .card
     .card-header
       display flex

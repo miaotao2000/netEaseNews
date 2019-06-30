@@ -1,22 +1,25 @@
 <template>
   <div class="page">
     <div class="header">
-      <div class="icon" @click="back">
+      <div class="icon" @click="back" v-show="comments">
         <img src="../assets/article/left.svg" alt="">
       </div>
-      <div class="avatar-con">
+      <div class="icon" @click="toArticle" v-show="!comments">
+        <img src="../assets/article/left.svg" alt="">
+      </div>
+      <div class="avatar-con" v-show="comments">
         <img src="../assets/video/avatar.svg" alt="" v-show="show">
       </div>
-      <div class="nickname-con">
+      <div class="nickname-con" v-show="comments">
         <div class="nickname" v-show="show">{{article.src}}</div>
       </div>
-      <div class="follow-btn-con">
+      <div class="follow-btn-con" @click="toPost" v-show="comments">
         <div class="follow-btn" :class="show?'show':''">
           {{show?'已有':''}}{{article.follow}}人参与跟帖
         </div>
       </div>
     </div>
-    <div class="bscroll" ref="bscrll">
+    <div class="bscroll" ref="bscrll" v-show='comments'>
     <div class="warp" ref='warp' @touchmove='pullUp' @touchend='pullUpFinish'>
     <div class="container">
       <div class="mt"></div>
@@ -33,19 +36,22 @@
         关注
       </div>
     </div>
-
     <div id="article" v-html="article.html"></div>
     </div>
-    <comments :id='article.id'/>
+    <div class="comments-con" ref="comments"></div>
+    <comments :id='article.id' :needMore='true'/>
     <div class="tip" v-show="tipShow">
       <div class="empty"></div>
       <div class="img-con"><img :src='tipImg[tipIndex]' alt=""></div>
       <div>{{tipMsg}}</div>
-      </div>
     </div>
+  </div>
+</div>
+    <div class="newcomments-con" v-show="!comments">
+    <newcomments :id='article.id' :newflo='newflo'/>
     </div>
     <write :trueWrite='trueWrite' @write='write' :flonumber='article.follow'/>
-    <true-write :trueWrite='trueWrite'/>
+    <true-write :trueWrite='trueWrite' @send='send'/>
   </div>
 </template>
 
@@ -56,11 +62,13 @@ import comments from '@/components/comments'
 import BScroll from 'better-scroll'
 import write from '@/components/writeFollow'
 import trueWrite from '@/components/trueWrite'
+import newcomments from '@/components/newComments'
 export default {
   components: {
     'comments': comments,
     'write': write,
-    'true-write': trueWrite
+    'true-write': trueWrite,
+    'newcomments': newcomments
   },
   data () {
     return {
@@ -79,7 +87,9 @@ export default {
         '../../static/imgs/close.svg'
       ],
       tipIndex: 0,
-      clientY: 0
+      clientY: 0,
+      comments: true,
+      newflo: ''
     }
   },
   created () {
@@ -102,6 +112,13 @@ export default {
       'noTabbar',
       'openLogin'
     ]),
+    toArticle () {
+      this.comments = true
+      this.myscroll.scrollTo(0, 0, 1000, 'ease')
+    },
+    toPost () {
+      this.comments = false
+    },
     back () {
       this.$router.push({name: this.$store.state.route[0], params: {state: 'back'}})
       let shift = this.shiftRoute()
@@ -127,16 +144,34 @@ export default {
     write () {
       if (this.$store.state.login) {
         this.trueWrite = true
+        this.myscroll.scrollToElement(this.$refs['comments'], 1000)
       } else {
         this.openLogin()
       }
+    },
+    send (opt) {
+      this.$http.post('/follow', {
+        content: opt,
+        userId: this.$store.state.user.id,
+        articleId: this.article.id
+      }).then(res => {
+        this.$message({
+          showClose: true,
+          message: res.data.msg,
+          type: 'success'
+        })
+        this.newflo = res.data.newflo
+        this.toPost()
+        this.trueWrite = false
+      })
     }
   },
   mounted () {
     this.$nextTick(() => {
       this.myscroll = new BScroll(this.$refs['bscrll'], {
         probeType: 3,
-        pullUpLoad: true
+        pullUpLoad: true,
+        freeScroll: true
       })
       this.myscroll.on('scroll', pos => {
         this.scrollY = pos.y
@@ -269,6 +304,8 @@ export default {
     opacity 1
   }
 }
+.newcomments-con
+  margin-top 1.066667rem /* 40/37.5 */
 </style>
 
 <style lang="stylus">

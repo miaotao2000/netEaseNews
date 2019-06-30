@@ -9,22 +9,10 @@ const static = require('koa-static-cache')
 
 const app = new Koa()
 
-// session储存数据库配置
-const sessionMysqlConfig = {
-  user: config.database.USERNAME,
-  password: config.database.PASSWORD,
-  database: config.database.DATABASE,
-  host: config.database.HOST,
-}
 
 // 结构上传对象
 app.use(bodyParser())
 
-// 配置session中间件
-app.use(session({
-  key: 'USER_SID',
-  store: new MysqlStore(sessionMysqlConfig)
-}))
 
 // 配置静态资源加载中间件
 app.use(static(path.join(__dirname,'./public'), {

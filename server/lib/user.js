@@ -44,10 +44,15 @@ const findUserById = (id) => {
 
 // 通过名字查找用户
 const findUserByName = nickName => {
-  let _sql = `select * from users where nickName=${nickName};`
+  let _sql = `select * from users where nickName='${nickName}';`
   return query(_sql)
 }
 
+// 通过账号查找用户
+const findUserByUser = user => {
+  let _sql = `select * from users where user='${user}';`
+  return query(_sql)
+}
 module.exports = {
   userAllin,
   insertUser,
@@ -56,5 +61,6 @@ module.exports = {
   updateUserName,
   updateUserFlo,
   findUserById,
-  findUserByName
+  findUserByName,
+  findUserByUser
 }

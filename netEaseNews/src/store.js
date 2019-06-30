@@ -49,7 +49,11 @@ const state = {
   cache: [],
   needTabbar: true,
   login: false,
-  openLogin: false
+  openLogin: false,
+  user: {
+    nicName: '',
+    id: ''
+  }
 }
 const getters = {
   // doneTodos: state => {
@@ -87,6 +91,9 @@ const mutations = {
   },
   hidLogin (state) {
     state.openLogin = false
+  },
+  setUser (state, user) {
+    state.user = user
   }
 }
 const actions = {
@@ -97,8 +104,10 @@ const actions = {
   changeCache: ({commit}, arr) => commit('changeCache', arr),
   noTabbar: ({commit}) => commit('noTabbar'),
   needTabbar: ({commit}) => commit('needTabbar'),
+  changeLogin: ({commit}) => commit('changeLogin'),
   openLogin: ({commit}) => commit('openLogin'),
-  hidLogin: ({commit}) => commit('hidLogin')
+  hidLogin: ({commit}) => commit('hidLogin'),
+  setUser: ({commit}, user) => commit('setUser', user)
 }
 export default new Vuex.Store({
   state,

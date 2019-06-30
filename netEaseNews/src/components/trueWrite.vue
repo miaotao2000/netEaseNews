@@ -1,10 +1,10 @@
 <template>
   <div class="ture-container" v-if="trueWrite">
     <div class="textarea">
-      <textarea name="" id="" rows="4" v-focus></textarea>
+      <textarea name="" id="" rows="4" v-focus v-model="content"></textarea>
     </div>
     <div class="btn-con">
-      <div class="btn">
+      <div class="btn" @click="send">
         发送
       </div>
     </div>
@@ -20,6 +20,17 @@ export default {
       inserted: function (el) {
         el.focus()
       }
+    }
+  },
+  data () {
+    return {
+      content: ''
+    }
+  },
+  methods: {
+    send () {
+      this.$emit('send', this.content)
+      this.content = ''
     }
   }
 }
