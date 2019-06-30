@@ -1,15 +1,19 @@
 <template>
   <div id="app">
     {{status}}
+  <div v-show="!$store.state.openLogin">
      <router-view />
+  </div>
      <div class="mg-bt" v-if="$store.state.needTabbar">
      </div>
      <tabbar :active='$store.state.active'/>
+     <login />
   </div>
 </template>
 
 <script>
 import tabbar from '@/page/homeComponents/Tabbar'
+import login from '@/components/login'
 export default {
   name: 'App',
   data () {
@@ -19,7 +23,8 @@ export default {
     }
   },
   components: {
-    'tabbar': tabbar
+    'tabbar': tabbar,
+    'login': login
   }
 }
 </script>

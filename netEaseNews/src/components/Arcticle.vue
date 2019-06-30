@@ -99,7 +99,8 @@ export default {
       'pushRoute',
       'shiftRoute',
       'needTabbar',
-      'noTabbar'
+      'noTabbar',
+      'openLogin'
     ]),
     back () {
       this.$router.push({name: this.$store.state.route[0], params: {state: 'back'}})
@@ -124,7 +125,11 @@ export default {
       }
     },
     write () {
-      this.trueWrite = true
+      if (this.$store.state.login) {
+        this.trueWrite = true
+      } else {
+        this.openLogin()
+      }
     }
   },
   mounted () {
