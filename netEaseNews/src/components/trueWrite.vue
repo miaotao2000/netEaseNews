@@ -1,7 +1,7 @@
 <template>
   <div class="ture-container" v-if="trueWrite">
     <div class="textarea">
-      <textarea name="" id="" rows="4" v-focus v-model="content"></textarea>
+      <textarea name="" id="" rows="4" v-focus v-model="content" :placeholder="Reply"></textarea>
     </div>
     <div class="btn-con">
       <div class="btn" @click="send">
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  props: ['trueWrite'],
+  props: ['trueWrite', 'reply'],
   directives: {
     focus: {
       // 指令的定义
@@ -31,6 +31,13 @@ export default {
     send () {
       this.$emit('send', this.content)
       this.content = ''
+    }
+  },
+  computed: {
+    Reply () {
+      if (this.reply) {
+        return `回复：${this.reply}`
+      }
     }
   }
 }

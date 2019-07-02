@@ -20,11 +20,12 @@
           <div class="content">
             {{item.content}}
           </div>
+    <other :other='item.other'/>
           <div class="repeat">
             <div class="time">
               {{item.createTime}}
             </div>
-            <div class="span">
+            <div class="span" @click="reply(item)">
               回复
             </div>
           </div>
@@ -38,8 +39,12 @@
 </template>
 
 <script>
+import other from '@/components/otherComments'
 export default {
-  props: ['id', 'needMore'],
+  props: ['id', 'needMore', 'newother'],
+  components: {
+    'other': other
+  },
   data () {
     return {
       comments: [],
@@ -50,6 +55,21 @@ export default {
   },
   created () {
     this.getComments()
+  },
+  watch: {
+    newother: function (newVal) {
+      let index = this.comments.findIndex(info => info.userId === newVal.floId)
+      if (index !== -1) {
+        if (this.comments[index].hasOwnProperty('other')) {
+          this.comments[index].other.push(newVal)
+        } else {
+          this.comments[index].other = []
+          this.comments[index].other.push(newVal)
+        }
+        let comment = this.comments[index]
+        this.comments.splice(index, 1, comment)
+      }
+    }
   },
   methods: {
     getComments () {
@@ -71,6 +91,9 @@ export default {
     },
     includes (index) {
       return this.active.includes(index)
+    },
+    reply (item) {
+      this.$emit('reply', {item})
     }
   }
 }

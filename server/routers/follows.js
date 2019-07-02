@@ -1,18 +1,56 @@
 const Router = require('koa-router')
 const moment = require('moment')
 const flowModel = require('../lib/flow')
+const otherModel = require('../lib/otherflo')
 const router = new Router()
 
 router.get('/follow', async (ctx, next) => {
-  let { id, page } = ctx.query 
-  let result = await flowModel.findAtcFloByPage(page, id)
+  let { id, page, way } = ctx.query 
+  if (way === 'new') {
+    let result = await flowModel.findAtcFloByPageTime(page, id)
+    let otherRes = await otherModel.findAllotherFlo(id)
+
+    otherRes.forEach(other => {
+      let index = result.findIndex(res => res.userID == other.floId)
+      if (index != -1) {
+        if (!result[index].hasOwnProperty('other')) {
+          result[index].other = []
+        }
+        result[index].other.push(other)
+      }
+    })
+
+    ctx.body = result.map(info => {
+      return {
+        content: info.content,
+        encourage: info.encourage,
+        nickName: info.nickName,
+        createTime: info.createTime,
+        userId: info.id,
+        other: info.other
+      }
+    })
+    return
+  }
+  let result = await flowModel.findAtcFloByPageEg(page, id)
+  let otherRes = await otherModel.findAllotherFlo(id)
+  otherRes.forEach(other => {
+    let index = result.findIndex(res => res.userID == other.floId)
+    if (index != -1) {
+      if (!result[index].hasOwnProperty('other')) {
+        result[index].other = []
+      }
+      result[index].other.push(other)
+    }
+  })
   ctx.body = result.map(info => {
     return {
       content: info.content,
       encourage: info.encourage,
       nickName: info.nickName,
       createTime: info.createTime,
-      userId: info.id
+      userId: info.id,
+      other: info.other
     }
   })
 })

@@ -15,16 +15,21 @@ const findotherFloById = id => {
   let _sql = `select * from otherFollows where id=${id};`
   return query(_sql)
 }
-
+// 查找一个跟帖的所有跟帖的跟帖
+const findAllotherFlo = articleId => {
+  let _sql = `select a.*,b.* from (select * from otherFollows where articleId = ${articleId}) a left join users b on
+  a.userID = b.id;`
+  return query(_sql)
+}
 // 删除一篇文章所有评论的跟评论
 const deleteAllOtherFlo = articleId => {
-  let _sql = `delete from otherFollows where articleId=${articleId}`
+  let _sql = `delete from otherFollows where articleId='${articleId}'`
   return query(_sql)
 }
 
 // 删除一个跟帖的所有跟帖
 const deleteOtherFloFromFLo = floId => {
-  let _sql = `delete from otherFollows where floId=${floId}`
+  let _sql = `delete from otherFollows where floId='${floId}'`
   return query(_sql)
 }
 
@@ -40,5 +45,6 @@ module.exports = {
   findotherFloById,
   deleteAllOtherFlo,
   findByPage,
+  findAllotherFlo,
   deleteOtherFloFromFLo
 }

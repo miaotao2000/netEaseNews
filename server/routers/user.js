@@ -28,7 +28,8 @@ router.post('/user/register', async (ctx, next) => {
     msg: '注册成功!',
     user: {
       id: userInfo[0].id,
-      nickName: userInfo[0].nickName
+      nickName: userInfo[0].nickName,
+      token: res[0].pass
     },
     register: true
   }
@@ -48,7 +49,7 @@ router.post('/user/login', async (ctx, next) => {
   if (md5(pass) != res[0].pass) {
     ctx.body = {
       login: false,
-      msg: '密码错误'
+      msg: '密码错误',
     }
     return
   }
@@ -57,7 +58,21 @@ router.post('/user/login', async (ctx, next) => {
     msg: '登录成功',
     user: {
       id: res[0].id,
-      nickName:res[0].nickName
+      nickName:res[0].nickName,
+      token: res[0].pass
+    }
+  }
+})
+
+router.post('/user/login/test', async (ctx, next) => {
+  let { token, user } = ctx.request.body
+  let res = await userModel.findUserById(user)
+  if (res.length && res[0].pass === token) {
+    ctx.body = {
+      user: {
+        id: res[0].id,
+        nickName: res[0].nickName
+      }
     }
   }
 })

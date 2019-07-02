@@ -39,7 +39,7 @@
     <div id="article" v-html="article.html"></div>
     </div>
     <div class="comments-con" ref="comments"></div>
-    <comments :id='article.id' :needMore='true'/>
+    <comments :id='article.id' :needMore='true' @reply='reply' :newother='newother'/>
     <div class="tip" v-show="tipShow">
       <div class="empty"></div>
       <div class="img-con"><img :src='tipImg[tipIndex]' alt=""></div>
@@ -47,11 +47,11 @@
     </div>
   </div>
 </div>
-    <div class="newcomments-con" v-show="!comments">
-    <newcomments :id='article.id' :newflo='newflo'/>
+    <div class="newcomments-con" v-show="!comments" @touchmove='closeInput'>
+    <newcomments :id='article.id' :newflo='newflo' @reply='reply' :newother='newotherfromNew'/>
     </div>
     <write :trueWrite='trueWrite' @write='write' :flonumber='article.follow'/>
-    <true-write :trueWrite='trueWrite' @send='send'/>
+    <true-write :trueWrite='trueWrite' @send='send' :reply='replySend.item.nickName'/>
   </div>
 </template>
 
@@ -89,7 +89,12 @@ export default {
       tipIndex: 0,
       clientY: 0,
       comments: true,
-      newflo: ''
+      newflo: '',
+      replySend: {
+        item: ''
+      },
+      newother: '',
+      newotherfromNew: ''
     }
   },
   created () {
@@ -112,6 +117,9 @@ export default {
       'noTabbar',
       'openLogin'
     ]),
+    closeInput () {
+      this.trueWrite = false
+    },
     toArticle () {
       this.comments = true
       this.myscroll.scrollTo(0, 0, 1000, 'ease')
@@ -141,15 +149,53 @@ export default {
         this.back()
       }
     },
-    write () {
+    reply (item) {
+      this.write('noscroll')
+      this.replySend = item
+    },
+    write (way) {
       if (this.$store.state.login) {
         this.trueWrite = true
+        if (way === 'noscroll') {
+          return
+        }
         this.myscroll.scrollToElement(this.$refs['comments'], 1000)
       } else {
         this.openLogin()
       }
     },
     send (opt) {
+      if (this.replySend) {
+        this.$http.post('/otherflo', {
+          content: opt,
+          userId: this.$store.state.user.id,
+          articleId: this.article.id,
+          floId: this.replySend.item.userId
+        }).then(res => {
+          // this.$message({
+          //   showClose: true,
+          //   message: res.data.msg,
+          //   type: 'success'
+          // })
+          this.trueWrite = false
+          if (this.replySend.way === 'new') {
+            this.newotherfromNew = {
+              nickName: this.$store.state.user.nickName,
+              content: opt,
+              encourage: 0,
+              floId: this.replySend.item.userId
+            }
+          }
+          this.newother = {
+            nickName: this.$store.state.user.nickName,
+            content: opt,
+            encourage: 0,
+            floId: this.replySend.item.userId
+          }
+          this.trueWrite = false
+        })
+        return
+      }
       this.$http.post('/follow', {
         content: opt,
         userId: this.$store.state.user.id,
@@ -160,7 +206,7 @@ export default {
           message: res.data.msg,
           type: 'success'
         })
-        this.newflo = res.data.newflo
+        this.newflo = {...res.data.newflo, nickName: this.$store.state.user.nickName}
         this.toPost()
         this.trueWrite = false
       })
@@ -171,7 +217,7 @@ export default {
       this.myscroll = new BScroll(this.$refs['bscrll'], {
         probeType: 3,
         pullUpLoad: true,
-        freeScroll: true
+        click: true
       })
       this.myscroll.on('scroll', pos => {
         this.scrollY = pos.y

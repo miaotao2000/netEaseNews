@@ -12,7 +12,6 @@ import swiper from '@/page/homeComponents/Swiper'
 import navbar from '@/page/homeComponents/Navbar'
 import column from '@/page/homeComponents/Column'
 import { mapActions } from 'vuex'
-import md5 from '../../util/md5'
 export default {
   components: {
     'swiper': swiper,
@@ -26,14 +25,16 @@ export default {
   },
   created () {
     let token = sessionStorage.getItem('token')
-    token = md5(token)
-    console.log(token)
-    this.setUser(token)
-    this.$message({
-      showClose: true,
-      message: `欢迎回来${this.$store.state.user.nickName}`,
-      type: 'success'
-    })
+    let user = localStorage.getItem('user')
+    if (token && !this.$store.state.login) {
+      this.$http.post('user/login/test', {
+        token,
+        user
+      }).then(res => {
+        this.changeLogin()
+        this.setUser(res.data.user)
+      })
+    }
   },
   mounted () {
     this.$router.push(this.$store.state.navbar[this.$store.state.active].component)
@@ -44,7 +45,8 @@ export default {
     ...mapActions([
       'pushRoute',
       'shiftRoute',
-      'setUser'
+      'setUser',
+      'changeLogin'
     ]),
     toColumn () {
       this.hid = false

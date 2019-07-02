@@ -30,18 +30,25 @@ const deleteAllFlo = articleId => {
   return query(_sql)
 }
 
-// 评论分页
-const findAtcFloByPage = (page, articleId) => {
+// 评论按点赞分页
+const findAtcFloByPageEg = (page, articleId) => {
   let _sql = `select a.*,b.* from (select * from articlesFollows where articleId = ${articleId}) a left join users b on
   a.userID = b.id order by encourage desc limit ${(page - 1) * 5},5;`
   return query(_sql)
 }
 
+// 评论按时间分页
+const findAtcFloByPageTime = (page, articleId) => {
+  let _sql = `select a.*,b.* from (select * from articlesFollows where articleId = ${articleId}) a left join users b on
+  a.userID = b.id order by createTime desc limit ${(page - 1) * 5},5;`
+  return query(_sql)
+}
 module.exports = {
   insertFloToArticle,
   updateEgToArticle,
   findArtcleFloById,
   deleteFlo,
   deleteAllFlo,
-  findAtcFloByPage
+  findAtcFloByPageEg,
+  findAtcFloByPageTime
 }

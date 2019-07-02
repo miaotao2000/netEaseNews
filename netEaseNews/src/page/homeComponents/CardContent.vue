@@ -4,9 +4,12 @@
       <div class="mask active" v-if='linked===index'></div>
       <div class="text" :class="item.read?'read':''">{{item.text}}</div>
       <div class="img-con">
-        <img :src="item.img[0]" alt="">
-        <img :src="item.img[1]" alt="">
-        <img :src="item.img[2]" alt="" id="imgLast">
+        <img src="../../assets/img/bg.gif" alt="" v-if="!includes(0)">
+        <img src="../../assets/img/bg.gif" alt="" v-if="!includes(1)">
+        <img src="../../assets/img/bg.gif" id='imgLast' alt="" v-if="!includes(2)">
+        <img :src="item.img[0]" alt="" @load="load(0)" :data-src='item.img[0]' v-show="includes(0)">
+        <img :src="item.img[1]" alt="" @load="load(1)" :data-src='item.img[1]' v-show="includes(1)">
+        <img :src="item.img[2]" alt="" id="imgLast" @load="load(2)" :data-src='item.img[2]' v-show='includes(2)'>
       </div>
       <span class="src">{{item.src}}</span>
       <span class="follow">{{item.follow}}跟帖</span>
@@ -20,7 +23,8 @@ export default {
   props: ['feedio'],
   data () {
     return {
-      linked: ''
+      linked: '',
+      img: []
     }
   },
   methods: {
@@ -34,6 +38,12 @@ export default {
         this.shiftRoute()
         this.changeCache(this.feedio)
       }, 300)
+    },
+    load (num) {
+      this.img.push(num)
+    },
+    includes (num) {
+      return this.img.includes(num)
     },
     ...mapActions([
       'pushRoute',

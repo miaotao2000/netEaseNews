@@ -52,7 +52,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import md5 from '../../util/md5'
 export default {
   directives: {
     focus: {
@@ -140,7 +139,6 @@ export default {
               this.user = ''
               this.pass = ''
               this.repass = ''
-              console.log(res.data)
               return
             }
             this.$message({
@@ -151,6 +149,8 @@ export default {
             this.changeLogin()
             this.setUser(res.data.user)
             this.hidLogin()
+            sessionStorage.setItem('token', res.data.user.token)
+            localStorage.setItem('user', res.data.user.id)
           })
         return
       }
@@ -169,11 +169,12 @@ export default {
         this.changeLogin()
         this.hidLogin()
         this.setUser(res.data.user)
-        sessionStorage.setItem('token', md5(res.data.user))
+        sessionStorage.setItem('token', res.data.user.token)
+        localStorage.setItem('user', res.data.user.id)
       })
     },
     test () {
-      this.user = this.user.replace(/[^\w./]/ig, '')
+      this.user = this.user.replace(/[^A-Za-z0-9]/g, '')
     }
   },
   computed: {
