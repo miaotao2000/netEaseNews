@@ -13,6 +13,7 @@
 
 <script>
 import Swiper from 'swiper/dist/js/swiper'
+import 'swiper/dist/css/swiper.css'
 import { mapActions } from 'vuex'
 export default {
   props: ['active', 'contentArr', 'totalnews'],

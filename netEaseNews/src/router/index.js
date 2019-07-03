@@ -1,17 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/page/Home'
-import Headlines from '@/page/homeComponents/Headlines'
-import Joke from '@/page/homeComponents/Joke'
-import City from '@/page/homeComponents/City'
-import Easetime from '@/page/homeComponents/Easetime'
-import Picture from '@/page/homeComponents/Picture'
-import Video from '@/page/Video'
-import Mine from '@/page/Mine'
-import Chat from '@/page/Chat'
-import Recommand from '@/page/chatComponents/recommand'
-import Follow from '@/page/chatComponents/follow'
-import Arcticle from '@/components/Arcticle'
 
 Vue.use(Router)
 
@@ -25,61 +14,83 @@ export default new Router({
         {
           path: '/Headlines',
           name: 'Headlines',
-          component: Headlines
+          component (resolve) {
+            require(['@/page/homeComponents/Headlines'], resolve)
+          }
         },
         {
           path: '/Joke',
           name: 'Joke',
-          component: Joke
+          component (resolve) {
+            require(['@/page/homeComponents/Joke'], resolve)
+          }
         },
         {
           path: '/City',
           name: 'City',
-          component: City
+          component (resolve) {
+            require(['@/page/homeComponents/City'], resolve)
+          }
         },
         {
           path: '/Easetime',
           name: 'Easetime',
-          component: Easetime
+          component (resolve) {
+            require(['@/page/homeComponents/Easetime'], resolve)
+          }
         },
         {
           path: '/Picture',
           name: 'Picture',
-          component: Picture
+          component (resolve) {
+            require(['@/page/homeComponents/Picture'], resolve)
+          }
         }
       ]
     },
     {
       path: '/Video',
       name: 'Video',
-      component: Video
+      component (resolve) {
+        require(['@/page/Video'], resolve)
+      }
     },
     {
       path: '/Chat',
       name: 'Chat',
-      component: Chat,
+      component (resolve) {
+        require(['@/page/Chat'], resolve)
+      },
       children: [
         {
           path: '/Chat/recommand',
           name: 'Recommand',
-          component: Recommand
+          component (resolve) {
+            require(['@/page/chatComponents/recommand'], resolve)
+          }
         },
         {
           path: '/Chat/follow',
           name: 'Follow',
-          component: Follow
+          component (resolve) {
+            require(['@/page/chatComponents/follow'], resolve)
+          }
         }
       ]
     },
     {
       path: '/Mine',
       name: 'Mine',
-      component: Mine
+      component (resolve) {
+        require(['@/page/Mine'], resolve)
+      }
     },
     {
       path: '/Arcticle',
       name: 'Arcticle',
-      component: Arcticle
+      component (resolve) {
+        require(['@/components/Arcticle'], resolve)
+      }
     }
   ]
 })
