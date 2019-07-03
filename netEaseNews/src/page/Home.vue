@@ -1,8 +1,8 @@
 <template>
   <div class="page">
-    <navbar :active='$store.state.active'  :list='$store.state.navbar' @toColumn='toColumn'/>
-    <swiper  :active='$store.state.active' :contentArr='$store.state.navbar'/>
-    <column :lists='$store.state.navbar' :hid='hid' :active='$store.state.active' :moreList='$store.state.moreList'
+    <navbar :active='$store.state.home.active'  :list='$store.state.home.navbar' @toColumn='toColumn'/>
+    <swiper  :active='$store.state.home.active' :contentArr='$store.state.home.navbar'/>
+    <column :list='$store.state.home.navbar' :hid='hid' :active='$store.state.home.active' :moreList='$store.state.home.moreList'
      @close='closeColumn'/>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
   created () {
     let token = sessionStorage.getItem('token')
     let user = localStorage.getItem('user')
-    if (token && !this.$store.state.login) {
+    if (token && !this.$store.state.home.login) {
       this.$http.post('user/login/test', {
         token,
         user
@@ -37,8 +37,8 @@ export default {
     }
   },
   mounted () {
-    this.$router.push(this.$store.state.navbar[this.$store.state.active].component)
-    this.pushRoute(this.$store.state.navbar[this.$store.state.active].component)
+    this.$router.push(this.$store.state.home.navbar[this.$store.state.home.active].component)
+    this.pushRoute(this.$store.state.home.navbar[this.$store.state.home.active].component)
     this.shiftRoute()
   },
   methods: {

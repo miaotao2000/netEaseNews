@@ -11,6 +11,7 @@
 <script>
 import card from '@/page/homeComponents/CardContent'
 import { Notify } from 'vant'
+import { mapActions } from 'vuex'
 export default {
   components: {
     card: card
@@ -25,6 +26,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'changePage'
+    ]),
     getHeadlines (page, way) {
       if (this.getting) {
         return
@@ -51,33 +55,39 @@ export default {
           }
 
           if (way === 'top') {
-            this.news = news.concat(this.news)
+            this.news = news
           }
           this.news = this.news.concat(news)
           this.getting = false
+          setTimeout(() => {
+            this.isLoading = false
+          }, 1000)
         })
     },
     loading () {
-      console.log('reach')
       this.getHeadlines(this.page)
     },
     onRefresh () {
       this.getHeadlines(this.page, 'top')
       Notify({
         message: '成功为您推荐5条新闻',
-        duration: 500,
-        className: 'notify'
+        className: 'notify',
+        duration: 800
       })
-      setTimeout(() => {
-        this.isLoading = false
-      }, 800)
     }
   },
+  beforeDestroy () {
+    this.changePage({
+      page: this.page,
+      name: 'headlines'
+    })
+  },
   created () {
+    this.page = this.$store.state.home.page['headlines']
     if (this.$route.params.state !== 'back') {
       this.getHeadlines(this.page)
     } else {
-      this.news = this.$store.state.cache
+      this.news = this.$store.state.home.caches['headlines']
     }
   }
 }
@@ -88,14 +98,16 @@ export default {
   top 2.4rem /* 90/37.5 */
   left 50%
   transform translateX(-50%)
-  animation show .2s linear forwards
+  animation show .1s linear
   opacity 1
 @keyframes show {
   0% {
     width 70%
+    top 0
   }
   10%{
     width 100%
+    top 2.4rem /* 90/37.5 */
   }
 }
 </style>

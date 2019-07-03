@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="$store.state.needTabbar">
+  <div class="container" v-if="$store.state.global.needTabbar">
     <div class="col">
       <div class="target" @click="toHome">
         <div class="icon">
@@ -50,10 +50,12 @@ export default {
   mounted () {
     this.active = {
       'Headlines': 0,
+      'Home': 0,
       'Video': 1,
       'Recommand': 2,
       'Mine': 3
     }[this.$route.name]
+    console.log(this.$route.name)
   },
   methods: {
     ...mapActions([

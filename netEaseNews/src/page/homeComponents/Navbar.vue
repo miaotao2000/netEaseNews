@@ -103,6 +103,8 @@ export default {
     overflow-y hidden
     white-space nowrap
     transition all 1s
+    &::-webkit-scrollbar
+      display none
     .item
       width 20% /* 84.38/37.5 */
       text-align center

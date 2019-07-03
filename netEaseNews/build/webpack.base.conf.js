@@ -48,6 +48,11 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  externals: {
+    'vue': 'Vue',
+    'vuex': 'Vuex',
+    'vue-router': 'VueRouter'
+  },
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []), 

@@ -39,7 +39,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  props: ['lists', 'hid', 'moreList'],
+  props: ['list', 'hid', 'moreList'],
   data () {
     return {
       tip: '点击进入栏目',
@@ -135,8 +135,6 @@ export default {
         let component = this.list[index].component
         this.list.splice(index, 1)
         this.moreList.push({name: deleteText, component})
-        console.log(this.moreList)
-        this.$emit('changeActive')
         return
       }
       let index = el.target.dataset.index
@@ -156,13 +154,14 @@ export default {
       this.editText = '编辑'
       this.edited = false
       this.$emit('close', this.list)
+      this.changeNavbar(this.list)
+      this.changeMoreList(this.moreList)
     },
     ...mapActions([
-      'changeActive'
+      'changeActive',
+      'changeNavbar',
+      'changeMoreList'
     ])
-  },
-  created () {
-    this.list = this.lists
   }
 }
 </script>

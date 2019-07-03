@@ -1,117 +1,139 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
 
-const state = {
-  navbar: [
-    {
-      name: '头条',
-      component: 'Headlines'
+const moduleHome = {
+  state: {
+    navbar: [
+      {
+        name: '头条',
+        component: 'Headlines'
+      },
+      {
+        name: '段子',
+        component: 'Joke'
+      },
+      {
+        name: '南昌',
+        component: 'City'
+      },
+      {
+        name: '笑话',
+        component: 'Easetime'
+      },
+      {
+        name: '图片',
+        component: 'Picture'
+      }
+    ],
+    moreList: [
+      {
+        name: '星座',
+        component: 'Constellation'
+      },
+      {
+        name: '音乐',
+        component: 'Musi'
+      },
+      {
+        name: '教育',
+        component: 'Education'
+      },
+      {
+        name: '佛学',
+        component: 'Buddhism'
+      }
+    ],
+    active: 0,
+    caches: {
+      headlines: []
     },
-    {
-      name: '段子',
-      component: 'Joke'
-    },
-    {
-      name: '南昌',
-      component: 'City'
-    },
-    {
-      name: '笑话',
-      component: 'Easetime'
-    },
-    {
-      name: '图片',
-      component: 'Picture'
+    page: {
+      headlines: 0
     }
-  ],
-  moreList: [
-    {
-      name: '星座',
-      component: 'Constellation'
+  },
+  mutations: {
+    changeActive (state, index) {
+      state.active = index
     },
-    {
-      name: '音乐',
-      component: 'Musi'
+    resetActive (state) {
+      state.active = 0
     },
-    {
-      name: '教育',
-      component: 'Education'
+    changeCache (state, opt) {
+      let { arr, name } = opt
+      state.caches[name] = arr
     },
-    {
-      name: '佛学',
-      component: 'Buddhism'
+    changePage (state, opt) {
+      let { page, name } = opt
+      state.page[name] = page
+    },
+    changeNavbar (state, navbar) {
+      state.navbar = navbar
+    },
+    changeMoreList (state, moreList) {
+      state.moreList = moreList
     }
-  ],
-  active: 0,
-  route: ['/', '/'],
-  cache: [],
-  needTabbar: true,
-  login: false,
-  openLogin: false,
-  user: {
-    nicName: '',
-    id: ''
+  },
+  actions: {
+    changeCache: ({commit}, opt) => commit('changeCache', opt),
+    changePage: ({commit}, opt) => commit('changePage', opt),
+    changeActive: ({commit}, index) => commit('changeActive', index),
+    resetActive: ({commit}) => commit('resetActive')
   }
-}
-const getters = {
-  // doneTodos: state => {
-  //     return state.count%2 != 0 ? 'odd' : 'even'
-  //   }
 }
 
-const mutations = {
-  changeActive (state, index) {
-    state.active = index
+const moduleGlobal = {
+  state: {
+    user: {
+      nickName: '',
+      id: ''
+    },
+    needTabbar: true,
+    login: false,
+    openLogin: false,
+    route: ['/', '/']
   },
-  resetActive (state) {
-    state.active = 0
+  mutations: {
+    noTabbar (state) {
+      state.needTabbar = false
+    },
+    needTabbar (state) {
+      state.needTabbar = true
+    },
+    changeLogin (state) {
+      state.login = !state.login
+    },
+    openLogin (state) {
+      state.openLogin = true
+    },
+    hidLogin (state) {
+      state.openLogin = false
+    },
+    setUser (state, user) {
+      state.user = user
+    },
+    pushRoute (state, router) {
+      state.route.push(router)
+    },
+    shiftRoute (state) {
+      state.route.shift()
+    }
   },
-  pushRoute (state, router) {
-    state.route.push(router)
-  },
-  shiftRoute (state) {
-    state.route.shift()
-  },
-  changeCache (state, arr) {
-    state.cache = arr
-  },
-  noTabbar (state) {
-    state.needTabbar = false
-  },
-  needTabbar (state) {
-    state.needTabbar = true
-  },
-  changeLogin (state) {
-    state.login = !state.login
-  },
-  openLogin (state) {
-    state.openLogin = true
-  },
-  hidLogin (state) {
-    state.openLogin = false
-  },
-  setUser (state, user) {
-    state.user = user
+  actions: {
+    pushRoute: ({commit}, router) => commit('pushRoute', router),
+    shiftRoute: ({commit}) => commit('shiftRoute'),
+    noTabbar: ({commit}) => commit('noTabbar'),
+    needTabbar: ({commit}) => commit('needTabbar'),
+    changeLogin: ({commit}) => commit('changeLogin'),
+    openLogin: ({commit}) => commit('openLogin'),
+    hidLogin: ({commit}) => commit('hidLogin'),
+    setUser: ({commit}, user) => commit('setUser', user)
   }
 }
-const actions = {
-  changeActive: ({commit}, index) => commit('changeActive', index),
-  resetActive: ({commit}) => commit('resetActive'),
-  pushRoute: ({commit}, router) => commit('pushRoute', router),
-  shiftRoute: ({commit}) => commit('shiftRoute'),
-  changeCache: ({commit}, arr) => commit('changeCache', arr),
-  noTabbar: ({commit}) => commit('noTabbar'),
-  needTabbar: ({commit}) => commit('needTabbar'),
-  changeLogin: ({commit}) => commit('changeLogin'),
-  openLogin: ({commit}) => commit('openLogin'),
-  hidLogin: ({commit}) => commit('hidLogin'),
-  setUser: ({commit}, user) => commit('setUser', user)
-}
+
 export default new Vuex.Store({
-  state,
-  getters,
-  mutations,
-  actions
+  modules: {
+    home: moduleHome,
+    global: moduleGlobal
+  }
 })

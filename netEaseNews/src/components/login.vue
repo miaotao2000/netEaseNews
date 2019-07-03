@@ -1,5 +1,5 @@
 <template>
-  <div class="login-con" v-show="$store.state.openLogin">
+  <div class="login-con" v-show="$store.state.global.openLogin">
     <div class="logo-con">
       <img src="../assets/myfollow/close1.svg" alt="" @click="hidLogin">
       <div class="logo">小易</div>
@@ -109,7 +109,7 @@ export default {
         return
       }
       if (el.target === this.$refs['user'] && this.user.length < 6) {
-        this.$message.error('账号有效位数大于6 ！')
+        this.$message('有效位数至少为6', 'error')
         this.user = ''
       }
       let show = [false, false, false]
@@ -135,17 +135,13 @@ export default {
           })
           .then(res => {
             if (!res.data.register) {
-              this.$message.error(res.data.msg)
+              this.$message(res.data.msg, 'error')
               this.user = ''
               this.pass = ''
               this.repass = ''
               return
             }
-            this.$message({
-              showClose: true,
-              message: res.data.msg,
-              type: 'success'
-            })
+            this.$message(res.data.msg, 'success')
             this.changeLogin()
             this.setUser(res.data.user)
             this.hidLogin()
@@ -159,13 +155,9 @@ export default {
         pass: this.pass
       }).then(res => {
         if (!res.data.login) {
-          this.$message.error(res.data.msg)
+          this.$message(res.data.msg, 'error')
         }
-        this.$message({
-          showClose: true,
-          message: res.data.msg,
-          type: 'success'
-        })
+        this.$message(res.data.msg, 'success')
         this.changeLogin()
         this.hidLogin()
         this.setUser(res.data.user)

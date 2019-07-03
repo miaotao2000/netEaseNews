@@ -1,7 +1,9 @@
+import Home from '@/page/Home'
+import Picture from '@/page/homeComponents/Picture'
+import Easetime from '@/page/homeComponents/Easetime'
+import Arcticle from '@/components/Arcticle'
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/page/Home'
-
 Vue.use(Router)
 
 export default new Router({
@@ -35,16 +37,12 @@ export default new Router({
         {
           path: '/Easetime',
           name: 'Easetime',
-          component (resolve) {
-            require(['@/page/homeComponents/Easetime'], resolve)
-          }
+          component: Easetime
         },
         {
           path: '/Picture',
           name: 'Picture',
-          component (resolve) {
-            require(['@/page/homeComponents/Picture'], resolve)
-          }
+          component: Picture
         }
       ]
     },
@@ -88,9 +86,7 @@ export default new Router({
     {
       path: '/Arcticle',
       name: 'Arcticle',
-      component (resolve) {
-        require(['@/components/Arcticle'], resolve)
-      }
+      component: Arcticle
     }
   ]
 })

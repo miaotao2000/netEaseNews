@@ -22,11 +22,11 @@ router.get('/articles', async (ctx, next) => {
     return {
       text: info.title,
       img: info.md.match(/\!\[\]\(.*\)/g).map(img => img.replace(/\!\[\]\(/g, '').replace(/\)/, ''))
-      .map(img => img.replace(/localhost/g, '192.168.1.104')),
+      .map(img => img.replace(/localhost/g, '192.168.43.12')),
       src: info.nickName,
       avatar: info.avatar,
       follow: info.flonumber,
-      html: mdit.render(info.md.replace(/localhost/g, '192.168.1.104')),
+      html: mdit.render(info.md.replace(/localhost/g, '192.168.43.12')),
       id: info.id,
       userId: info.userId,
       time: info.updateTime

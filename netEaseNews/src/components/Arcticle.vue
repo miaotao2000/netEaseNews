@@ -128,7 +128,7 @@ export default {
       this.comments = false
     },
     back () {
-      this.$router.push({name: this.$store.state.route[0], params: {state: 'back'}})
+      this.$router.push({name: this.$store.state.global.route[0], params: {state: 'back'}})
       let shift = this.shiftRoute()
       this.pushRoute(shift)
     },
@@ -154,7 +154,7 @@ export default {
       this.replySend = item
     },
     write (way) {
-      if (this.$store.state.login) {
+      if (this.$store.state.global.login) {
         this.trueWrite = true
         if (way === 'noscroll') {
           return
@@ -168,7 +168,7 @@ export default {
       if (this.replySend) {
         this.$http.post('/otherflo', {
           content: opt,
-          userId: this.$store.state.user.id,
+          userId: this.$store.state.global.user.id,
           articleId: this.article.id,
           floId: this.replySend.item.userId
         }).then(res => {
@@ -180,14 +180,14 @@ export default {
           this.trueWrite = false
           if (this.replySend.way === 'new') {
             this.newotherfromNew = {
-              nickName: this.$store.state.user.nickName,
+              nickName: this.$store.state.global.user.nickName,
               content: opt,
               encourage: 0,
               floId: this.replySend.item.userId
             }
           }
           this.newother = {
-            nickName: this.$store.state.user.nickName,
+            nickName: this.$store.state.global.user.nickName,
             content: opt,
             encourage: 0,
             floId: this.replySend.item.userId
@@ -198,7 +198,7 @@ export default {
       }
       this.$http.post('/follow', {
         content: opt,
-        userId: this.$store.state.user.id,
+        userId: this.$store.state.global.user.id,
         articleId: this.article.id
       }).then(res => {
         this.$message({

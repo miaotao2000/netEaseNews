@@ -36,7 +36,11 @@ export default {
         this.$router.push({name: 'Arcticle', params: { item }})
         this.pushRoute('Arcticle')
         this.shiftRoute()
-        this.changeCache(this.feedio)
+        // 只能传一个参数
+        this.changeCache({
+          arr: this.feedio,
+          name: 'headlines'
+        })
       }, 300)
     },
     load (num) {
