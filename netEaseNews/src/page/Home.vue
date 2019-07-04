@@ -26,7 +26,7 @@ export default {
   created () {
     let token = sessionStorage.getItem('token')
     let user = localStorage.getItem('user')
-    if (token && !this.$store.state.home.login) {
+    if (token && !this.$store.state.global.login) {
       this.$http.post('user/login/test', {
         token,
         user

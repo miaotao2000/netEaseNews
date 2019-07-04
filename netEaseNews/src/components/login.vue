@@ -156,6 +156,7 @@ export default {
       }).then(res => {
         if (!res.data.login) {
           this.$message(res.data.msg, 'error')
+          return
         }
         this.$message(res.data.msg, 'success')
         this.changeLogin()

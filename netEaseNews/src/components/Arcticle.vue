@@ -119,6 +119,7 @@ export default {
     ]),
     closeInput () {
       this.trueWrite = false
+      this.replySend.item = ''
     },
     toArticle () {
       this.comments = true
@@ -134,6 +135,7 @@ export default {
     },
     pullUp () {
       this.trueWrite = false
+      this.replySend.item = ''
       if (this.maxY - this.scrollY >= 60 && this.maxY) {
         this.tipMsg = '释放关闭此页'
         this.tipIndex = 1
@@ -165,7 +167,7 @@ export default {
       }
     },
     send (opt) {
-      if (this.replySend) {
+      if (this.replySend.item) {
         this.$http.post('/otherflo', {
           content: opt,
           userId: this.$store.state.global.user.id,
@@ -206,7 +208,7 @@ export default {
           message: res.data.msg,
           type: 'success'
         })
-        this.newflo = {...res.data.newflo, nickName: this.$store.state.user.nickName}
+        this.newflo = {...res.data.newflo, nickName: this.$store.state.global.user.nickName}
         this.toPost()
         this.trueWrite = false
       })
