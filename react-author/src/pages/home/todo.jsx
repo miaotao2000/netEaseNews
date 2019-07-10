@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Todoitem from './todoitem'
 import './todo.styl'
 
@@ -19,7 +20,9 @@ export default class Todo extends React.Component {
       <div id="todo">
         {
           todoItem.map((item, index) => (
+            <Link to={item.path}>
             <Todoitem key={index} item={item}></Todoitem>
+            </Link>
           ))
         }
       </div>

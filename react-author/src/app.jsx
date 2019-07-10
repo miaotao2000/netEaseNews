@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 // import Login from './pages/login/login';
 import Home from './pages/home/home';
+import Article from './pages/article/article';
 export default class App extends React.Component {
   render () {
     return (
@@ -10,6 +11,7 @@ export default class App extends React.Component {
           <Switch>
             {/* <Route path='/login' component={Login}></Route> */}
             <Route path='/home' component={Home}></Route>
+            <Route component={Article}></Route>
           </Switch>
         </BrowserRouter>
       </div>
