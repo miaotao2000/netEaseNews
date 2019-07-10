@@ -1,0 +1,44 @@
+#todoitem
+  display inline-block
+  width 180px
+  height 180px
+  margin-bottom 50px
+  margin-left 30px
+  margin-top 5px
+  position relative
+  img
+    position absolute
+    width 67.5px
+    height 67.5px
+    top 50%
+    left 50%
+    transform translate(-50%,-50%)
+    transition all .3s ease
+  .text
+    position absolute
+    height 67.5px
+    top 50%
+    left 50%
+    transform translate(-50%,-50%)
+    color white
+    width 100%
+    font-size 0
+    text-align center
+    line-height 67.5px
+    visibility hidden
+    transition all .1s ease
+  &:hover
+    cursor pointer
+    img
+      width 0
+    .text
+      visibility visible
+      font-size 30px
+.article
+  background-color #0163B1
+.video
+  background-color #2E7D9A
+.chat
+  background-color #C20053
+.about
+  background-color #28AD60

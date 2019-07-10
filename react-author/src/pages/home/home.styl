@@ -1,0 +1,26 @@
+#home
+  width 750px
+  height 420px
+  animation fade 1s ease forwards
+  position absolute
+  top 50%
+  left 50%
+  margin-left -375px
+  margin-top -210px
+  .center
+    display flex
+    position absolute
+    left 50%
+    top 50%
+    transform translate(-50%,-50%)
+
+@keyframes fade {
+  0% {
+    opacity 0
+    transform translateY(40px)
+  }
+  100% {
+    transform translateY(0)
+    opacity 1
+  }
+}
