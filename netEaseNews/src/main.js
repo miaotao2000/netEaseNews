@@ -2,11 +2,12 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import App from './App'
 import router from './router'
-import { List, PullRefresh, ImagePreview } from 'vant'
+import { List, PullRefresh, Swipe, SwipeItem } from 'vant'
 import 'vant/lib/index.css'
 import store from './store'
 import axios from 'axios'
 import Message from './action-component/message'
+import ImagePrevire from './action-component/imagePreview'
 import Vue from 'vue'
 
 Vue.config.productionTip = false
@@ -14,7 +15,8 @@ Vue.prototype.$http = axios // 将axios挂载到vue的原型链上
 Vue.use(PullRefresh)
 Vue.use(List)
 Vue.use(Message)
-Vue.use(ImagePreview)
+Vue.use(ImagePrevire)
+Vue.use(Swipe).use(SwipeItem)
 
 /* eslint-disable no-new */
 

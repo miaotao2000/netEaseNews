@@ -44,18 +44,19 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      active: 0
+      active: null
     }
   },
   mounted () {
-    this.active = {
-      'Headlines': 0,
-      'Home': 0,
-      'Video': 1,
-      'Recommand': 2,
-      'Mine': 3
-    }[this.$route.name]
-    console.log(this.$route.name)
+    setTimeout(() => {
+      this.active = {
+        'Headlines': 0,
+        'Home': 0,
+        'Video': 1,
+        'Recommand': 2,
+        'Mine': 3
+      }[this.$route.name]
+    }, 200)
   },
   methods: {
     ...mapActions([
@@ -70,18 +71,27 @@ export default {
       this.active = 0
     },
     toVideo () {
+      if (this.active === 1) {
+        return
+      }
       this.$router.push({name: 'Video'})
       this.pushRoute('Video')
       this.shiftRoute()
       this.active = 1
     },
     toChat () {
+      if (this.active === 2) {
+        return
+      }
       this.$router.push({name: 'Recommand'})
       this.pushRoute('Recommand')
       this.shiftRoute()
       this.active = 2
     },
     toMine () {
+      if (this.active === 3) {
+        return
+      }
       this.$router.push({name: 'Mine'})
       this.pushRoute('Mine')
       this.shiftRoute()

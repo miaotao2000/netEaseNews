@@ -36,7 +36,7 @@
         关注
       </div>
     </div>
-    <div id="article" v-html="article.html"></div>
+    <div id="article" v-html="article.html" @click.stop="imageView" ref="article"></div>
     </div>
     <div class="comments-con" ref="comments"></div>
     <comments :id='article.id' :needMore='true' @reply='reply' :newother='newother'/>
@@ -94,7 +94,8 @@ export default {
         item: ''
       },
       newother: '',
-      newotherfromNew: ''
+      newotherfromNew: '',
+      img: {}
     }
   },
   created () {
@@ -115,8 +116,27 @@ export default {
       'shiftRoute',
       'needTabbar',
       'noTabbar',
-      'openLogin'
+      'openLogin',
+      'changeImg',
+      'viewImg'
     ]),
+    imageView (e) {
+      let source = e.target
+      if (source.nodeName === 'IMG') {
+        if (!this.img.imgs) {
+          let imgs = []
+          let imgArr = this.$refs['article'].querySelectorAll(`img`)
+          imgArr.forEach((img, index) => {
+            img.setAttribute('index', index)
+            imgs.push(img.src)
+          })
+          this.img.imgs = imgs
+        }
+        this.img.index = source.getAttribute('index')
+        this.changeImg(this.img)
+        this.viewImg()
+      }
+    },
     closeInput () {
       this.trueWrite = false
       this.replySend.item = ''

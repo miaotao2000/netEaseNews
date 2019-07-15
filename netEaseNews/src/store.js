@@ -91,7 +91,9 @@ const moduleGlobal = {
     needTabbar: true,
     login: false,
     openLogin: false,
-    route: ['/', '/']
+    route: ['/', '/'],
+    imgs: {},
+    viewImg: false
   },
   mutations: {
     noTabbar (state) {
@@ -117,6 +119,12 @@ const moduleGlobal = {
     },
     shiftRoute (state) {
       state.route.shift()
+    },
+    changeImg (state, imgs) {
+      state.imgs = imgs
+    },
+    viewImg (state) {
+      state.viewImg = !state.viewImg
     }
   },
   actions: {
@@ -127,7 +135,9 @@ const moduleGlobal = {
     changeLogin: ({commit}) => commit('changeLogin'),
     openLogin: ({commit}) => commit('openLogin'),
     hidLogin: ({commit}) => commit('hidLogin'),
-    setUser: ({commit}, user) => commit('setUser', user)
+    viewImg: ({commit}) => commit('viewImg'),
+    setUser: ({commit}, user) => commit('setUser', user),
+    changeImg: ({commit}, imgs) => commit('changeImg', imgs)
   }
 }
 

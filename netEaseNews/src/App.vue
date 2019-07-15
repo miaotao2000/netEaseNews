@@ -8,12 +8,14 @@
      </div>
      <tabbar :active='$store.state.global.active'/>
      <login />
+     <viewImg :show='$store.state.global.viewImg' :images='$store.state.global.imgs'/>
   </div>
 </template>
 
 <script>
 import tabbar from '@/page/homeComponents/Tabbar'
 import login from '@/components/login'
+import Image from '@/components/Image'
 export default {
   name: 'App',
   data () {
@@ -24,7 +26,8 @@ export default {
   },
   components: {
     'tabbar': tabbar,
-    'login': login
+    'login': login,
+    'viewImg': Image
   }
 }
 </script>

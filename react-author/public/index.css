@@ -86,6 +86,26 @@ html, body, #root, .bg {
   background-size: cover;
 }
 
+.bg {
+  transition: all .5s
+}
+
 .main {
   background-color:rgba(132,90,236,.7)
+}
+
+.article {
+  background-color: rgba(1, 99, 177, .7)
+}
+
+.video {
+  background-color: rgba(46, 125, 154, .7)
+}
+
+.chat {
+  background-color: rgba(193, 0, 83, .7)
+}
+
+.about {
+  background-color: rgba(40, 173, 96, .7)
 }
