@@ -1,7 +1,7 @@
 <template>
   <div class="login-con" v-show="$store.state.global.openLogin">
     <div class="logo-con">
-      <img src="../assets/myfollow/close1.svg" alt="" @click="hidLogin">
+      <img src="../assets/myfollow/close1.svg" alt="" @click="hideLogin">
       <div class="logo">小易</div>
     </div>
 
@@ -30,7 +30,7 @@
     </div>
     <div class="pass-con input" @click="passShow">
       <div class="desc" :id="block(show[1])">密码</div>
-      <input type="password" placeholder="" v-if="show[1]" v-focus @blur="hid" v-model="pass">
+      <input type="password" placeholder="" v-if="show[1]" v-focus @blur="hid" v-model="pass" ref='pass'>
       <span><img src="../../static/imgs/right.svg" alt="" v-show="passed"></span>
     </div>
     <div class="pass-con input" @click="repassShow">
@@ -86,6 +86,12 @@ export default {
       'openLogin',
       'setUser'
     ]),
+    hideLogin () {
+      this.user = ''
+      this.pass = ''
+      this.repass = ''
+      this.hidLogin()
+    },
     toregister () {
       this.register = !this.register
       this.user = ''
@@ -109,8 +115,7 @@ export default {
         return
       }
       if (el.target === this.$refs['user'] && this.user.length < 6) {
-        this.$message('有效位数至少为6', 'error')
-        this.user = ''
+        this.$message('账号有效位数至少为6', 'error')
       }
       let show = [false, false, false]
       if (this.user) {

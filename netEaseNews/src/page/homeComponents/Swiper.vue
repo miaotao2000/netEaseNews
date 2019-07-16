@@ -3,7 +3,7 @@
     <div class="swiper-wrapper" ref="swiper">
         <div class="swiper-slide relative" v-for="(item,index) of contentArr" :key='index' :data-index='index'>
           <div class="router" v-if="index==active">
-            <router-view />
+            <router-view/>
           </div>
           <div class="loading" v-else>正在加载</div>
         </div>
@@ -20,7 +20,8 @@ export default {
   data () {
     return {
       myswiper: null,
-      test: true
+      test: true,
+      completed: false
     }
   },
   mounted () {

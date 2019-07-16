@@ -1,13 +1,16 @@
 <template>
   <div class="container">
-    <div class="video-con" v-for="(item, index) of feedStream" :key='index'>
-    <div class="video" :style="'background-image:url('+item.bgImg+')'">
+    <div class="video-con" v-for="(item, index) of feedStream" :key='index' @click="play(index)">
+    <div class="video" :style="'background-image:url('+item.bgImg+')'" v-if='index!=active'>
       <div class="title">{{item.title}}</div>
       <div class="play-times">{{item.playTimes}}播放</div>
       <div class="img">
          <img src="../../assets/video/play.svg" alt="" class="icon">
       </div>
       <div class="time">{{item.time}}</div>
+    </div>
+    <div class="video" v-else>
+      <video src="http://192.168.43.12:3000/videos/b.webm" autoplay="autoplay" ref='video'></video>
     </div>
     <div class="footer">
       <div class="author-con">
@@ -38,6 +41,7 @@
 export default {
   data () {
     return {
+      active: null,
       feedStream: [
         {
           title: '刘恺威新恋情曝光，女友是大家最熟悉的她？网友：难怪会离婚！',
@@ -71,14 +75,25 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    play (index) {
+      this.active = index
+      this.$nextTick(() => {
+        console.log(this.$refs.video)
+        this.$refs.video[0].play()
+      })
+    }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
 .video
-  height 4.8rem /* 180/37.5 */
+  height 5.866667rem /* 220/37.5 */
   position relative
+  video
+    width 100%
   .title
     padding .133333rem /* 5/37.5 */
     color white

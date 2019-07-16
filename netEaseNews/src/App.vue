@@ -36,6 +36,7 @@ export default {
 *
   margin 0
   padding 0
+  -webkit-overflow-scrolling touch
 .page
   width 100%
 .mg-bt

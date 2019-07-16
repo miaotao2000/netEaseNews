@@ -4,9 +4,9 @@
       <div class="mask active" v-if='linked===index'></div>
       <div class="text" :class="item.read?'read':''">{{item.text}}</div>
       <div class="img-con">
-        <img src="../../assets/img/bg.gif" alt="" v-if="!includes(0)">
-        <img src="../../assets/img/bg.gif" alt="" v-if="!includes(1)">
-        <img src="../../assets/img/bg.gif" id='imgLast' alt="" v-if="!includes(2)">
+        <div src="" alt="" v-if="!includes(0)" class="img"></div>
+        <div src="" alt="" v-if="!includes(1)" class="img"></div>
+        <div src="" id='imgLast' alt="" v-if="!includes(2)" class="img"></div>
         <img :src="item.img[0]" alt="" @load="load(0)" :data-src='item.img[0]' v-show="includes(0)">
         <img :src="item.img[1]" alt="" @load="load(1)" :data-src='item.img[1]' v-show="includes(1)">
         <img :src="item.img[2]" alt="" id="imgLast" @load="load(2)" :data-src='item.img[2]' v-show='includes(2)'>
@@ -103,6 +103,14 @@ export default {
     margin .133333rem /* 5/37.5 */ 0
     margin-right .5%
     margin-bottom .4rem /* 15/37.5 */
+  .img
+    display inline-block
+    width 33%
+    height 1.866667rem /* 70/37.5 */
+    margin .133333rem /* 5/37.5 */ 0
+    margin-right .5%
+    margin-bottom .4rem /* 15/37.5 */
+    background-color #ccc
   #imgLast
     margin-right 0
   span

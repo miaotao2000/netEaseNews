@@ -194,11 +194,6 @@ export default {
           articleId: this.article.id,
           floId: this.replySend.item.userId
         }).then(res => {
-          // this.$message({
-          //   showClose: true,
-          //   message: res.data.msg,
-          //   type: 'success'
-          // })
           this.trueWrite = false
           if (this.replySend.way === 'new') {
             this.newotherfromNew = {
@@ -231,6 +226,7 @@ export default {
         this.newflo = {...res.data.newflo, nickName: this.$store.state.global.user.nickName}
         this.toPost()
         this.trueWrite = false
+        this.article.follow += 1
       })
     }
   },
