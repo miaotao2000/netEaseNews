@@ -4,12 +4,12 @@
       <div class="mask active" v-if='linked===index'></div>
       <div class="text" :class="item.read?'read':''">{{item.text}}</div>
       <div class="img-con">
-        <div src="" alt="" v-if="!includes(0)" class="img"></div>
-        <div src="" alt="" v-if="!includes(1)" class="img"></div>
-        <div src="" id='imgLast' alt="" v-if="!includes(2)" class="img"></div>
-        <img :src="item.img[0]" alt="" @load="load(0)" :data-src='item.img[0]' v-show="includes(0)">
-        <img :src="item.img[1]" alt="" @load="load(1)" :data-src='item.img[1]' v-show="includes(1)">
-        <img :src="item.img[2]" alt="" id="imgLast" @load="load(2)" :data-src='item.img[2]' v-show='includes(2)'>
+        <div src="" alt="" v-if="!includes(0) && !cache" class="img"></div>
+        <div src="" alt="" v-if="!includes(1) && !cache" class="img"></div>
+        <div src="" id='imgLast' alt="" v-if="!includes(2) && !cache" class="img"></div>
+        <img :src="item.img[0]" alt="" @load="load(0)" :data-src='item.img[0]' v-show="includes(0) || cache">
+        <img :src="item.img[1]" alt="" @load="load(1)" :data-src='item.img[1]' v-show="includes(1) || cache">
+        <img :src="item.img[2]" alt="" id="imgLast" @load="load(2)" :data-src='item.img[2]' v-show='includes(2) || cache'>
       </div>
       <span class="src">{{item.src}}</span>
       <span class="follow">{{item.follow}}跟帖</span>
@@ -20,7 +20,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  props: ['feedio'],
+  props: ['feedio', 'cache'],
   data () {
     return {
       linked: '',

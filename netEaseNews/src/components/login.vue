@@ -258,7 +258,7 @@ export default {
     border-radius .533333rem /* 20/37.5 */
     margin-top 1.333333rem /* 50/37.5 */
     font-size .426667rem /* 16/37.5 */
-    opacity 0.8
+    opacity 0.6
   .active
     opacity 1
   .other

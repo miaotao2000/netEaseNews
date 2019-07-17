@@ -2,7 +2,7 @@
   <div class="page">
     <van-pull-refresh @refresh="onRefresh" v-model="isLoading" loosing-text=' '>
       <van-list @load="loading" :offset="45" :finished="finished" :immediate-check="false">
-        <card :feedio="news"/>
+        <card :feedio="news" :cache='cache'/>
       </van-list>
     </van-pull-refresh>
   </div>
@@ -22,7 +22,8 @@ export default {
       finished: false,
       getting: false,
       isLoading: false,
-      page: 0
+      page: 0,
+      cache: false
     }
   },
   methods: {
@@ -88,6 +89,7 @@ export default {
       this.getHeadlines(this.page)
     } else {
       this.news = this.$store.state.home.caches['headlines']
+      this.cache = true
     }
   }
 }
