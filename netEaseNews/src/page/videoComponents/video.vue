@@ -1,16 +1,17 @@
 <template>
   <div class="container">
-    <div class="video-con" v-for="(item, index) of feedStream" :key='index' @click="play(index)">
+    <div class="video-con" v-for="(item, index) of feedStream" :key='index'>
     <div class="video" :style="'background-image:url('+item.bgImg+')'" v-if='index!=active'>
       <div class="title">{{item.title}}</div>
       <div class="play-times">{{item.playTimes}}播放</div>
       <div class="img">
-         <img src="../../assets/video/play.svg" alt="" class="icon">
+         <img src="../../assets/video/play.svg" alt="" class="icon" @touchend="play(index)">
       </div>
       <div class="time">{{item.time}}</div>
     </div>
     <div class="video" v-else>
-      <video src="http://192.168.43.12:3000/videos/b.webm" autoplay="autoplay" ref='video'></video>
+      <video :src='item.video' ref='video' controls='controls' id='video'
+      poster="../../assets/img/loading.gif"></video>
     </div>
     <div class="footer">
       <div class="author-con">
@@ -51,7 +52,8 @@ export default {
           avatar: '',
           name: '夜郎观世界',
           praiseNumber: 480,
-          commentNumbre: 108
+          commentNumbre: 108,
+          video: 'http://192.168.43.12:3000/videos/a.webm'
         },
         {
           title: '李咏生前最后主持，不断跟大家挥手道别，却无人注意他说的2个字',
@@ -61,7 +63,8 @@ export default {
           avatar: '',
           name: '娱乐综艺唠',
           praiseNumber: 145,
-          commentNumbre: 41
+          commentNumbre: 41,
+          video: 'http://192.168.43.12:3000/videos/b.webm'
         },
         {
           title: '《欢乐喜剧人》贾玲实力搞笑，观众笑到肚子疼，搞笑啊！',
@@ -71,7 +74,8 @@ export default {
           avatar: '',
           name: '嘻哈百晓生',
           praiseNumber: 15,
-          commentNumbre: 5
+          commentNumbre: 5,
+          video: 'http://192.168.43.12:3000/videos/c.webm'
         }
       ]
     }
@@ -80,7 +84,6 @@ export default {
     play (index) {
       this.active = index
       this.$nextTick(() => {
-        console.log(this.$refs.video)
         this.$refs.video[0].play()
       })
     }

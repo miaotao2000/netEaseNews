@@ -218,11 +218,7 @@ export default {
         userId: this.$store.state.global.user.id,
         articleId: this.article.id
       }).then(res => {
-        this.$message({
-          showClose: true,
-          message: res.data.msg,
-          type: 'success'
-        })
+        this.$message(res.data.msg, 'success')
         this.newflo = {...res.data.newflo, nickName: this.$store.state.global.user.nickName}
         this.toPost()
         this.trueWrite = false
